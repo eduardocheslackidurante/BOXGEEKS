@@ -39,6 +39,7 @@
         }
         .form button:hover {
             background-color: #0099ff;
+            transition: 0.4s;
         }
         .toggle-button {
             text-align: center;
