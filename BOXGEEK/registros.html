@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="pr-br">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="registros.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Painel Administrativo</title>
+    <style>
+        /* Estilo adicional para tornar os cards clicáveis */
+        .card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Estilo para links */
+        a {
+            text-decoration: none;
+            color: inherit; /* Mantém a cor original do texto */
+        }
+    </style>
 </head>
 <body>
 
@@ -17,35 +35,45 @@
 </header>
 
 <main>
-        <div class="card" id="produtos">
-            <i class="fas fa-box-open fa-3x"></i>
-            <h2>Produtos</h2>
-            <p>Gerenciamento de produtos da empresa.</p>
-        </div>
+        <a href="produtos.html">
+            <div class="card" id="produtos">
+                <i class="fas fa-box-open fa-3x"></i>
+                <h2>Produtos</h2>
+                <p>Gerenciamento de produtos da empresa.</p>
+            </div>
+        </a>
 
-        <div class="card" id="clientes">
-            <i class="fas fa-users fa-3x"></i>
-            <h2>Clientes</h2>
-            <p>Informações sobre clientes cadastrados.</p>
-        </div>
+        <a href="clientes.html">
+            <div class="card" id="clientes">
+                <i class="fas fa-users fa-3x"></i>
+                <h2>Clientes</h2>
+                <p>Informações sobre clientes cadastrados.</p>
+            </div>
+        </a>
 
-        <div class="card" id="funcionarios">
-            <i class="fas fa-user-tie fa-3x"></i>
-            <h2>Funcionários</h2>
-            <p>Lista e gerenciamento de funcionários.</p>
-        </div>
+        <a href="funcionarios.html">
+            <div class="card" id="funcionarios">
+                <i class="fas fa-user-tie fa-3x"></i>
+                <h2>Funcionários</h2>
+                <p>Lista e gerenciamento de funcionários.</p>
+            </div>
+        </a>
 
-        <div class="card" id="estoque">
-            <i class="fas fa-warehouse fa-3x"></i>
-            <h2>Estoque</h2>
-            <p>Controle de estoque e movimentações.</p>
-        </div>
+        <a href="estoque.html">
+            <div class="card" id="estoque">
+                <i class="fas fa-warehouse fa-3x"></i>
+                <h2>Estoque</h2>
+                <p>Controle de estoque e movimentações.</p>
+            </div>
+        </a>
 
-        <div class="card" id="fornecedor">
-            <i class="fas fa-truck fa-3x"></i>
-            <h2>Fornecedor</h2>
-            <p>Informações e contatos de fornecedores.</p>
-        </div>
+        <a href="fornecedor.html">
+            <div class="card" id="fornecedor">
+                <i class="fas fa-truck fa-3x"></i>
+                <h2>Fornecedor</h2>
+                <p>Informações e contatos de fornecedores.</p>
+            </div>
+        </a>
 </main>
 
 </body>
