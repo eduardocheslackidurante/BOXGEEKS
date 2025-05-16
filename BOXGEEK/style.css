@@ -46,7 +46,7 @@ body {
     border-radius: 5px;
     border: 1px solid #cccccc;
 }
-.form button {
+.form-button {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -54,7 +54,7 @@ body {
     color: white;
     cursor: pointer;
 }
-.form button:hover {
+.form-button:hover {
     background-color: #0099ff;
     transition: 0.4s;
 }
