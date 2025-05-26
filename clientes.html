@@ -127,13 +127,16 @@
         
         .modal-content {
             background-color: #333;
-            margin: 10% auto;
+            margin: 5% auto;
             padding: 30px;
-            width: 50%;
+            width: 60%;
+            max-width: 600px;
             border-radius: 10px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
             border: 1px solid #32870e;
             animation: slideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         @keyframes slideIn {
@@ -183,7 +186,7 @@
             color: #ccc;
         }
         
-        .form-group input {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 10px 15px;
             border-radius: 5px;
@@ -191,9 +194,16 @@
             border: 1px solid #32870e50;
             color: white;
             transition: border-color 0.3s ease;
+            box-sizing: border-box;
         }
         
-        .form-group input:focus {
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
             outline: none;
             border-color: #39FF14;
             box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.2);
@@ -282,6 +292,24 @@
             font-size: 1.2em;
             margin-top: 10px;
         }
+
+        /* Responsividade da tabela */
+        @media (max-width: 1200px) {
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -318,6 +346,7 @@
                 <th>CPF</th>
                 <th>Telefone</th>
                 <th>Email</th>
+                <th>Endereço</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -352,6 +381,10 @@
                 <label for="email">Email:</label>
                 <input type="email" id="email" required placeholder="exemplo@email.com">
             </div>
+            <div class="form-group">
+                <label for="endereco">Endereço:</label>
+                <textarea id="endereco" required placeholder="Rua, número, bairro, cidade - CEP"></textarea>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
                 <button type="submit" class="btn-salvar">Salvar</button>
@@ -383,7 +416,8 @@
             nome: 'Jair Bolsonaro',
             cpf: '020.459.607-23',
             telefone: '(61) 99907-4852',
-            email: 'bolsonaro18@gmail.com'
+            email: 'bolsonaro18@gmail.com',
+            endereco: 'Rua das Flores, 123, Centro, Brasília - DF, CEP: 70040-010'
         }
     ];
     
@@ -412,6 +446,7 @@
     const cpfInput = document.getElementById('cpf');
     const telefoneInput = document.getElementById('telefone');
     const emailInput = document.getElementById('email');
+    const enderecoInput = document.getElementById('endereco');
     const modalTitulo = document.getElementById('modalTitulo');
     
     // Função para carregar os clientes na tabela
@@ -447,6 +482,7 @@
                     <td>${cliente.cpf}</td>
                     <td>${cliente.telefone}</td>
                     <td>${cliente.email}</td>
+                    <td>${cliente.endereco}</td>
                     <td class="acoes">
                         <button class="btn-editar" data-id="${cliente.id}"><i class="fas fa-edit"></i></button>
                         <button class="btn-excluir" data-id="${cliente.id}"><i class="fas fa-trash"></i></button>
@@ -484,6 +520,7 @@
             cpfInput.value = cliente.cpf;
             telefoneInput.value = cliente.telefone;
             emailInput.value = cliente.email;
+            enderecoInput.value = cliente.endereco;
             modal.style.display = 'block';
         }
     }
@@ -503,17 +540,18 @@
         const cpf = cpfInput.value;
         const telefone = telefoneInput.value;
         const email = emailInput.value;
+        const endereco = enderecoInput.value;
         
         if (clienteIdInput.value) {
             // Editar cliente existente
             const index = clientes.findIndex(c => c.id === parseInt(clienteIdInput.value));
             if (index !== -1) {
-                clientes[index] = { id: parseInt(clienteIdInput.value), nome, cpf, telefone, email };
+                clientes[index] = { id: parseInt(clienteIdInput.value), nome, cpf, telefone, email, endereco };
                 mostrarMensagem('Cliente atualizado com sucesso!', true);
             }
         } else {
             // Adicionar novo cliente
-            clientes.push({ id, nome, cpf, telefone, email });
+            clientes.push({ id, nome, cpf, telefone, email, endereco });
             proximoId++;
             mostrarMensagem('Cliente adicionado com sucesso!', true);
         }
