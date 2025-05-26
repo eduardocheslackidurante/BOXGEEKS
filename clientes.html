@@ -59,6 +59,77 @@
             color: #000;
             transform: translateY(-2px);
         }
+
+        /* Estilos da barra de pesquisa */
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border-radius: 25px;
+            background-color: #222;
+            border: 2px solid #32870e50;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #39FF14;
+            box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: #888;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #32870e;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .btn-limpar {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #555;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-limpar:hover {
+            background-color: #444;
+            border-color: #666;
+            color: #39FF14;
+        }
+
+        .search-results {
+            color: #ccc;
+            font-size: 14px;
+            margin-left: 10px;
+        }
         
         table {
             width: 100%;
@@ -293,6 +364,18 @@
             margin-top: 10px;
         }
 
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #ccc;
+        }
+
+        .no-results i {
+            font-size: 3em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
         /* Responsividade da tabela */
         @media (max-width: 1200px) {
             table {
@@ -308,6 +391,15 @@
             .modal-content {
                 width: 95%;
                 margin: 2% auto;
+            }
+
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: none;
             }
         }
     </style>
@@ -337,6 +429,18 @@
 
     <div class="mensagem sucesso" id="mensagemSucesso"></div>
     <div class="mensagem erro" id="mensagemErro"></div>
+
+    <!-- Barra de pesquisa -->
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar cliente por ID...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        <button type="button" class="btn-limpar" id="btnLimpar">
+            <i class="fas fa-times"></i> Limpar
+        </button>
+        <span class="search-results" id="searchResults"></span>
+    </div>
 
     <table id="tabelaClientes">
         <thead>
@@ -421,11 +525,10 @@
         }
     ];
     
-    // Variável para armazenar o próximo ID disponível
+    // Variáveis globais
     let proximoId = 2;
-    
-    // Variável para armazenar o ID do cliente a ser excluído
     let clienteParaExcluir = null;
+    let clientesFiltrados = [...clientes]; // Array para armazenar os clientes filtrados
     
     // Elementos do DOM
     const modal = document.getElementById('clienteModal');
@@ -440,6 +543,11 @@
     const mensagemSucesso = document.getElementById('mensagemSucesso');
     const mensagemErro = document.getElementById('mensagemErro');
     
+    // Elementos da pesquisa
+    const searchInput = document.getElementById('searchInput');
+    const btnLimpar = document.getElementById('btnLimpar');
+    const searchResults = document.getElementById('searchResults');
+    
     // Elementos do formulário
     const clienteIdInput = document.getElementById('clienteId');
     const nomeInput = document.getElementById('nome');
@@ -449,31 +557,81 @@
     const enderecoInput = document.getElementById('endereco');
     const modalTitulo = document.getElementById('modalTitulo');
     
+    // Função para filtrar clientes por ID
+    function filtrarClientes(termoPesquisa) {
+        if (!termoPesquisa.trim()) {
+            clientesFiltrados = [...clientes];
+        } else {
+            const termo = termoPesquisa.toLowerCase().trim();
+            clientesFiltrados = clientes.filter(cliente => 
+                cliente.id.toString().includes(termo)
+            );
+        }
+        carregarClientes();
+        atualizarResultadosPesquisa(termoPesquisa);
+    }
+    
+    // Função para atualizar o texto dos resultados da pesquisa
+    function atualizarResultadosPesquisa(termoPesquisa) {
+        if (!termoPesquisa.trim()) {
+            searchResults.textContent = '';
+        } else {
+            const total = clientesFiltrados.length;
+            searchResults.textContent = `${total} resultado${total !== 1 ? 's' : ''} encontrado${total !== 1 ? 's' : ''}`;
+        }
+    }
+    
+    // Função para limpar a pesquisa
+    function limparPesquisa() {
+        searchInput.value = '';
+        clientesFiltrados = [...clientes];
+        carregarClientes();
+        searchResults.textContent = '';
+    }
+    
     // Função para carregar os clientes na tabela
     function carregarClientes() {
         const listaClientes = document.getElementById('listaClientes');
         listaClientes.innerHTML = '';
         
+        // Remove elementos de estado vazio anteriores
+        const emptyState = document.querySelector('.empty-state');
+        const noResults = document.querySelector('.no-results');
+        if (emptyState) emptyState.remove();
+        if (noResults) noResults.remove();
+        
         if (clientes.length === 0) {
-            // Estado vazio
+            // Estado vazio - nenhum cliente cadastrado
             const tabelaClientes = document.getElementById('tabelaClientes');
             tabelaClientes.style.display = 'none';
             
-            const emptyState = document.createElement('div');
-            emptyState.className = 'empty-state';
-            emptyState.innerHTML = `
+            const emptyStateDiv = document.createElement('div');
+            emptyStateDiv.className = 'empty-state';
+            emptyStateDiv.innerHTML = `
                 <i class="fas fa-users-slash"></i>
                 <h2>Nenhum cliente cadastrado</h2>
                 <p>Clique em "Adicionar Cliente" para começar.</p>
             `;
-            listaClientes.parentNode.insertBefore(emptyState, listaClientes);
+            listaClientes.parentNode.insertBefore(emptyStateDiv, listaClientes);
+        } else if (clientesFiltrados.length === 0) {
+            // Nenhum resultado encontrado na pesquisa
+            const tabelaClientes = document.getElementById('tabelaClientes');
+            tabelaClientes.style.display = 'none';
+            
+            const noResultsDiv = document.createElement('div');
+            noResultsDiv.className = 'no-results';
+            noResultsDiv.innerHTML = `
+                <i class="fas fa-search"></i>
+                <h2>Nenhum cliente encontrado</h2>
+                <p>Tente pesquisar com um ID diferente.</p>
+            `;
+            listaClientes.parentNode.insertBefore(noResultsDiv, listaClientes);
         } else {
+            // Mostrar clientes filtrados
             const tabelaClientes = document.getElementById('tabelaClientes');
             tabelaClientes.style.display = 'table';
-            const emptyState = document.querySelector('.empty-state');
-            if (emptyState) emptyState.remove();
             
-            clientes.forEach(cliente => {
+            clientesFiltrados.forEach(cliente => {
                 const tr = document.createElement('tr');
                 tr.className = 'fadeIn';
                 tr.innerHTML = `
@@ -557,7 +715,9 @@
         }
         
         modal.style.display = 'none';
-        carregarClientes();
+        
+        // Atualizar a lista filtrada e recarregar
+        filtrarClientes(searchInput.value);
     }
     
     // Função para excluir um cliente
@@ -567,7 +727,9 @@
             clientes.splice(index, 1);
             confirmarExclusaoModal.style.display = 'none';
             mostrarMensagem('Cliente excluído com sucesso!', true);
-            carregarClientes();
+            
+            // Atualizar a lista filtrada e recarregar
+            filtrarClientes(searchInput.value);
         } else {
             mostrarMensagem('Erro ao excluir cliente!', false);
         }
@@ -584,7 +746,21 @@
         }, 3000);
     }
     
-    // Event Listeners
+    // Event Listeners para pesquisa
+    searchInput.addEventListener('input', (e) => {
+        filtrarClientes(e.target.value);
+    });
+    
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            filtrarClientes(e.target.value);
+        }
+    });
+    
+    btnLimpar.addEventListener('click', limparPesquisa);
+    
+    // Event Listeners existentes
     btnAdicionar.addEventListener('click', abrirModalAdicionar);
     
     btnCancelar.addEventListener('click', () => {
@@ -647,7 +823,10 @@
     });
     
     // Carregar os clientes ao iniciar a página
-    document.addEventListener('DOMContentLoaded', carregarClientes);
+    document.addEventListener('DOMContentLoaded', () => {
+        clientesFiltrados = [...clientes];
+        carregarClientes();
+    });
 </script>
 
 </body>
