@@ -6,3 +6,4 @@
 - adicionar menu retratil
 - deixar o sistema com design mais simples
 - colocar tudo em um html só (opcional)
+- a página 'fornecedor' não é necessaria no sistema, mas sim no site.
