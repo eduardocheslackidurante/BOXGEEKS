@@ -1,0 +1,62 @@
+DROP TABLE if EXISTS clientes;
+
+
+-- Tabela de clientes
+CREATE TABLE IF NOT EXISTS clientes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  cpf VARCHAR(14) NOT NULL UNIQUE,
+  telefone VARCHAR(15),
+  email VARCHAR(100),
+  data_nascimento DATE,
+  endereco TEXT
+);
+
+-- Inserção de dados na tabela clientes
+INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
+VALUES (
+  'murilo',
+  '123.456.789-00',
+  '(45) 99999-9991',
+  'emailmurelo@coisas.xyz',
+  '1985-06-15',
+  'Rua manoel gostoso, 123, São Miguel do Gostoso - RN' 
+);
+
+-- Tabela de produtos
+CREATE TABLE IF NOT EXISTS produtos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  quantidade INTEGER NOT NULL,
+  preco DECIMAL(8,2) NOT NULL, 
+  marca VARCHAR(50)
+);
+  
+-- Inserção de dados na tabela produtos
+INSERT INTO produtos (nome, quantidade, preco, marca)
+VALUES (
+  'caixa som',
+  37,
+  40.00,
+  'jbl'
+);
+
+-- Tabela de fornecedor
+CREATE TABLE IF NOT EXISTS fornecedor (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  telefone VARCHAR(15) NOT NULL,
+  cnpj VARCHAR(15) NOT NULL
+);
+
+INSERT INTO fornecedor (nome, telefone, cnpj)
+VALUES (
+  'fornecedor',
+  '(45) 99999-9991',
+  '20.182.807/0004-42'
+  )
+  
+
+SELECT * FROM clientes;
+SELECT * FROM produtos;
+SELECT * FROM fornecedor;
