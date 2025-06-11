@@ -1,6 +1,5 @@
 DROP TABLE if EXISTS clientes;
 
-
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
