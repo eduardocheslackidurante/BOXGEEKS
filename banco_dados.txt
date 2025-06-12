@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS clientes (
 -- Inserção de dados na tabela clientes
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
 VALUES ('murilo', '123.456.789-00', '(45) 99999-9991', 'emailmurelo@coisas.xyz', '1985-06-15', 'Rua manoel gostoso, 123, São Miguel do Gostoso - RN');
+INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
 VALUES ('teste2', '987-654-321-00', '(45) 97475-7457', 'emailkelvin@coisas.xyz', '2014-83-12', 'rua do grosso, 39, perocão - ES');           
 -- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
