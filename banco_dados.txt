@@ -1,4 +1,6 @@
 DROP TABLE if EXISTS clientes;
+DROP TABLE if EXISTS produtos;
+DROP TABLE if EXISTS forneceor;
 
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
@@ -53,7 +55,7 @@ VALUES (
   'fornecedor',
   '(45) 99999-9991',
   '20.182.807/0004-42'
-  )
+  );
   
 
 SELECT * FROM clientes;
