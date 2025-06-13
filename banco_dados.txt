@@ -1,6 +1,7 @@
 DROP TABLE if EXISTS clientes;
 DROP TABLE if EXISTS produtos;
 DROP TABLE if EXISTS fornecedor;
+drop table if exists funcionario;
 
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
@@ -55,6 +56,14 @@ VALUES
 ('Redragon','(45) 3378-4472','39.834.813/0001-12'),
 ('Samsung','(45) 3422-8485','32.121.091/0001-00');
 
+CREATE table if not EXISTS funcionario (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  funcao VARCHAR(30),
+  telefone VARCHAR(15)
+);
+INSERT INTO funcionario (nome, funcao, telefone)
+VALUES ('')
 
 SELECT * FROM clientes;
 SELECT * FROM produtos;
