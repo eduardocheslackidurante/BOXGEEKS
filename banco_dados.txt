@@ -15,9 +15,14 @@ CREATE TABLE IF NOT EXISTS clientes (
 
 -- Inserção de dados na tabela clientes
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('murilo', '123.456.789-00', '(45) 99999-9991', 'emailmurelo@coisas.xyz', '1985-06-15', 'Rua manoel gostoso, 123, São Miguel do Gostoso - RN');
+VALUES ('Jair Bolsonaro', '123.456.789-08', '(45) 99999-9991', 'emailmito@coisas.xyz', '1985-06-15', 'Rua manoel afonso, 123, São Miguel do Afonso - RN');
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('teste2', '987-654-321-00', '(45) 97475-7457', 'emailkelvin@coisas.xyz', '2014-83-12', 'rua do grosso, 39, perocão - ES');           
+VALUES ('Serjão Berranteiro', '987-654-321-45', '(45) 97475-7457', 'emailberranteiro@coisas.xyz', '2014-09-12', 'rua do posto, 39, serjão - ES');           
+INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
+VALUES ('Leão XI', '987-654-321-12', '(45) 97475-7457', 'emailvaticano@coisas.xyz', '2008-04-12', 'rua da ponte, 23, santo padre - ES');           
+INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
+VALUES ('Mauro Camarão', '987-654-321-78', '(45) 97475-7457', 'emailcamarão@coisas.xyz', '2011-11-12', 'rua camilles, 19, touro - ES');           
+
 -- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,7 +34,12 @@ CREATE TABLE IF NOT EXISTS produtos (
   
 -- Inserção de dados na tabela produtos
 INSERT INTO produtos (nome, quantidade, preco, marca)
-VALUES ('caixa som', 37, 40.00, 'jbl');
+VALUES 
+('JBL Boombox 3', 5, '2.499,99', 'JBL'),
+('JBL Tune 720BT',10,'439.99','JBL'),
+('Amvox Caixa Amplificadora ACA 1000',5,'1.049,99','Amvox'),
+('Amvox Caixa Amplificadora ACA 150 Pop',10,'219.99','Amvox'),
+('Headset Redragon Zeus Pro',10,'149.99','Redragon');
 
 -- Tabela de fornecedor
 CREATE TABLE IF NOT EXISTS fornecedor (
@@ -40,8 +50,11 @@ CREATE TABLE IF NOT EXISTS fornecedor (
 );
 
 INSERT INTO fornecedor (nome, telefone, cnpj)
-VALUES ('fornecedor', '(45) 99999-9991', '20.182.807/0004-42');
-  
+VALUES 
+('JBL', '(45) 99999-9991', '20.182.807/0004-42'),
+('Redragon','(45) 3378-4472','39.834.813/0001-12'),
+('Samsung','(45) 3422-8485','32.121.091/0001-00');
+
 
 SELECT * FROM clientes;
 SELECT * FROM produtos;
