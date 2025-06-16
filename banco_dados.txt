@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS produtos (
 -- Inserção de dados na tabela produtos
 INSERT INTO produtos (nome, quantidade, preco, marca)
 VALUES 
-('JBL Boombox 3', 5, '2.499,99', 'JBL'),
+('JBL Boombox 3', 5, '2499.99', 'JBL'),
 ('JBL Tune 720BT',10,'439.99','JBL'),
-('Amvox Caixa Amplificadora ACA 1000',5,'1.049,99','Amvox'),
+('Amvox Caixa Amplificadora ACA 1000',5,'1049.99','Amvox'),
 ('Amvox Caixa Amplificadora ACA 150 Pop',10,'219.99','Amvox'),
 ('Headset Redragon Zeus Pro',10,'149.99','Redragon');
 
