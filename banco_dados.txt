@@ -63,8 +63,11 @@ CREATE table if not EXISTS funcionario (
   telefone VARCHAR(15)
 );
 INSERT INTO funcionario (nome, funcao, telefone)
-VALUES ('')
+VALUES
+('Léo Lins', 'vendedor', '(11) 97611-5654'),
+('Dom Pedro II', 'entregador', '(21) 99835-4922');
 
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM fornecedor;
+SELECT * FROM funcionario;
