@@ -10,23 +10,21 @@ CREATE TABLE IF NOT EXISTS clientes (
   nome VARCHAR(100) NOT NULL,
   cpf VARCHAR(14) NOT NULL UNIQUE,
   telefone VARCHAR(15),
-  email VARCHAR(100),
-  data_nascimento DATE,
-  endereco TEXT
+  email VARCHAR(100),  endereco TEXT
 );
 
 -- Inserção de dados na tabela clientes
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('Jair Bolsonaro', '123.456.789-08', '(45) 99999-9991', 'emailmito@coisas.xyz', '1985-06-15', 'Rua manoel afonso, 123, São Miguel do Afonso - RN');
+VALUES ('Jair Bolsonaro', '123.456.789-08', '(45) 99999-9991', 'emailmito@coisas.xyz', 'Rua manoel afonso, 123, São Miguel do Afonso - RN');
 
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('Serjão Berranteiro', '987-654-321-45', '(45) 97475-7457', 'emailberranteiro@coisas.xyz', '2014-09-12', 'rua do posto, 39, serjão - ES');
+VALUES ('Serjão Berranteiro', '987-654-321-45', '(45) 97475-7457', 'emailberranteiro@coisas.xyz', 'rua do posto, 39, serjão - ES');
 
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('Leão XI', '987-654-321-12', '(45) 97475-7457', 'emailvaticano@coisas.xyz', '2008-04-12', 'rua da ponte, 23, santo padre - ES');
+VALUES ('Leão XI', '987-654-321-12', '(45) 97475-7457', 'emailvaticano@coisas.xyz', 'rua da ponte, 23, santo padre - ES');
 
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('Mauro Camarão', '987-654-321-78', '(45) 97475-7457', 'emailcamarão@coisas.xyz', '2011-11-12', 'rua camilles, 19, touro - ES');
+VALUES ('Mauro Camarão', '987-654-321-78', '(45) 97475-7457', 'emailcamarão@coisas.xyz', 'rua camilles, 19, touro - ES');
 
 -- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
