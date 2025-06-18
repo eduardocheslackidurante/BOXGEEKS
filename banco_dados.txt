@@ -1,7 +1,8 @@
-DROP TABLE if EXISTS clientes;
-DROP TABLE if EXISTS produtos;
-DROP TABLE if EXISTS fornecedor;
-drop table if exists funcionario;
+DROP TABLE IF EXISTS clientes;
+DROP TABLE IF EXISTS produtos;
+DROP TABLE IF EXISTS fornecedor;
+DROP TABLE IF EXISTS funcionario;
+DROP TABLE IF EXISTS pcleintes;
 
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
@@ -17,12 +18,15 @@ CREATE TABLE IF NOT EXISTS clientes (
 -- Inserção de dados na tabela clientes
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
 VALUES ('Jair Bolsonaro', '123.456.789-08', '(45) 99999-9991', 'emailmito@coisas.xyz', '1985-06-15', 'Rua manoel afonso, 123, São Miguel do Afonso - RN');
+
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('Serjão Berranteiro', '987-654-321-45', '(45) 97475-7457', 'emailberranteiro@coisas.xyz', '2014-09-12', 'rua do posto, 39, serjão - ES');           
+VALUES ('Serjão Berranteiro', '987-654-321-45', '(45) 97475-7457', 'emailberranteiro@coisas.xyz', '2014-09-12', 'rua do posto, 39, serjão - ES');
+
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('Leão XI', '987-654-321-12', '(45) 97475-7457', 'emailvaticano@coisas.xyz', '2008-04-12', 'rua da ponte, 23, santo padre - ES');           
+VALUES ('Leão XI', '987-654-321-12', '(45) 97475-7457', 'emailvaticano@coisas.xyz', '2008-04-12', 'rua da ponte, 23, santo padre - ES');
+
 INSERT INTO clientes (nome, cpf, telefone, email, data_nascimento, endereco)
-VALUES ('Mauro Camarão', '987-654-321-78', '(45) 97475-7457', 'emailcamarão@coisas.xyz', '2011-11-12', 'rua camilles, 19, touro - ES');           
+VALUES ('Mauro Camarão', '987-654-321-78', '(45) 97475-7457', 'emailcamarão@coisas.xyz', '2011-11-12', 'rua camilles, 19, touro - ES');
 
 -- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
@@ -36,11 +40,11 @@ CREATE TABLE IF NOT EXISTS produtos (
 -- Inserção de dados na tabela produtos
 INSERT INTO produtos (nome, quantidade, preco, marca)
 VALUES 
-('JBL Boombox 3', 5, '2499.99', 'JBL'),
-('JBL Tune 720BT',10,'439.99','JBL'),
-('Amvox Caixa Amplificadora ACA 1000',5,'1049.99','Amvox'),
-('Amvox Caixa Amplificadora ACA 150 Pop',10,'219.99','Amvox'),
-('Headset Redragon Zeus Pro',10,'149.99','Redragon');
+('JBL Boombox 3', 5, 2499.99, 'JBL'),
+('JBL Tune 720BT', 10, 439.99, 'JBL'),
+('Amvox Caixa Amplificadora ACA 1000', 5, 1049.99, 'Amvox'),
+('Amvox Caixa Amplificadora ACA 150 Pop', 10, 219.99, 'Amvox'),
+('Headset Redragon Zeus Pro', 10, 149.99, 'Redragon');
 
 -- Tabela de fornecedor
 CREATE TABLE IF NOT EXISTS fornecedor (
@@ -53,21 +57,64 @@ CREATE TABLE IF NOT EXISTS fornecedor (
 INSERT INTO fornecedor (nome, telefone, cnpj)
 VALUES 
 ('JBL', '(45) 99999-9991', '20.182.807/0004-42'),
-('Redragon','(45) 3378-4472','39.834.813/0001-12'),
-('Samsung','(45) 3422-8485','32.121.091/0001-00');
+('Redragon', '(45) 3378-4472', '39.834.813/0001-12'),
+('Samsung', '(45) 3422-8485', '32.121.091/0001-00');
 
-CREATE table if not EXISTS funcionario (
+-- Tabela de funcionario
+CREATE TABLE IF NOT EXISTS funcionario (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR(100) NOT NULL,
   funcao VARCHAR(30),
   telefone VARCHAR(15)
 );
+
 INSERT INTO funcionario (nome, funcao, telefone)
 VALUES
 ('Léo Lins', 'vendedor', '(11) 97611-5654'),
 ('Dom Pedro II', 'entregador', '(21) 99835-4922');
 
+CREATE TABLE IF NOT EXISTS pcleintes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  cpf VARCHAR(14),
+  FOREIGN KEY (cpf) REFERENCES clientes (cpf)
+);
+
+INSERT INTO pcleintes (cpf)
+VALUES 
+('123.456.789-08'),
+('987-654-321-45');
+
+CREATE TABLE IF NOT EXISTS pfuncionarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  funcionario_id INTEGER,
+  nome VARCHAR(100),
+  FOREIGN KEY (funcionario_id) REFERENCES funcionario (id),
+  FOREIGN KEY (nome) REFERENCES funcionario (nome)
+);
+
+INSERT INTO pfuncionarios (funcionario_id, nome)
+VALUES 
+(1, 'Léo Lins'),
+(2, 'Dom Pedro II');
+
+CREATE TABLE IF NOT EXISTS pprodutos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100),
+  FOREIGN KEY (nome) REFERENCES produtos (nome)
+);
+
+INSERT INTO pprodutos (nome)
+VALUES 
+('JBL Boombox 3'),
+('JBL Tune 720BT'),
+('Amvox Caixa Amplificadora ACA 1000'),
+('Amvox Caixa Amplificadora ACA 150 Pop'),
+('Headset Redragon Zeus Pro');
+
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM fornecedor;
 SELECT * FROM funcionario;
+SELECT * FROM pcleintes;
+SELECT * FROM pfuncionarios;
+SELECT * FROM pprodutos;
