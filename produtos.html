@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Gerenciamento de Produtos</title>
-    <style> /*Abrir um style dentro do HTML permite usar e customiar o CSS sem ter que mexer no stylesheet.*/
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -88,6 +88,19 @@
             margin-top: 60px;
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .produto-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
         .section-title {
             font-size: 1.8rem;
             margin-bottom: 2rem;
@@ -98,78 +111,6 @@
             padding-bottom: 10px;
             border-bottom: 1px solid #32870e50;
             text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
-        }
-
-        .search-container {
-            position: relative;
-            margin-bottom: 2rem;
-            max-width: 400px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 45px 12px 15px;
-            background-color: #222;
-            border: 1px solid #32870e50;
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #39FF14;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
-        }
-
-        .search-input::placeholder {
-            color: #aaa;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #32870e;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus + .search-icon {
-            color: #39FF14;
-        }
-
-        .clear-search {
-            position: absolute;
-            right: 45px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: none;
-        }
-
-        .clear-search:hover {
-            color: #39FF14;
-            transform: translateY(-50%) scale(1.2);
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 50px;
-            color: #666;
-            font-size: 1.2rem;
-            display: none;
-        }
-
-        .no-results i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
         }
 
         .add-product-btn {
@@ -200,330 +141,386 @@
             transform: scale(1.2);
         }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .product-card {
-            background-color: #222;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            border: 1px solid #32870e50;
-            position: relative;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background-color: #32870e;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
-            border-color: #32870e;
-        }
-
-        .product-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .product-image {
-            height: 180px;
-            background-color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
-        }
-
-        .product-image i {
-            font-size: 3.5rem;
-            color: #32870e;
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover .product-image i {
-            color: #39FF14;
-            transform: scale(1.2);
-            text-shadow: 0 0 15px rgba(57, 255, 20, 0.7);
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-title {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: #fff;
-            transition: color 0.3s ease;
-        }
-
-        .product-card:hover .product-title {
-            color: #39FF14;
-            text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
-        }
-
-        .product-card p {
-            color: #ccc;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .product-stock, .product-price {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        .product-stock span:last-child, 
-        .product-price span:last-child {
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .product-actions {
-            padding: 15px;
-            background-color: #333;
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            border-top: 1px solid #32870e50;
-        }
-
-        .edit-btn, .delete-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .edit-btn {
-            color: #32870e;
-            background-color: rgba(50, 135, 14, 0.1);
-            border: 1px solid #32870e50;
-        }
-
-        .edit-btn:hover {
-            color: #39FF14;
-            background-color: rgba(57, 255, 20, 0.2);
-            transform: scale(1.1) rotate(10deg);
-            border-color: #39FF14;
-        }
-
-        .delete-btn {
-            color: #cc3300;
-            background-color: rgba(204, 51, 0, 0.1);
-            border: 1px solid rgba(204, 51, 0, 0.3);
-        }
-
-        .delete-btn:hover {
-            color: #ff4d4d;
-            background-color: rgba(255, 77, 77, 0.2);
-            transform: scale(1.1) rotate(-10deg);
-            border-color: #ff4d4d;
-        }
-
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            overflow: auto;
-            backdrop-filter: blur(3px);
-        }
-
-        .modal-content {
-            background-color: #222;
-            margin: 8% auto;
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 12px;
-            position: relative;
-            border: 1px solid #32870e;
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
-            animation: modalFadeIn 0.4s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.8rem;
-            color: #ccc;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            color: #39FF14;
-            transform: rotate(90deg) scale(1.2);
-        }
-
-        .modal-content h2 {
-            color: #39FF14;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
-        }
-
-        .form-group {
+        /* Estilos da barra de pesquisa */
+        .search-container {
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #39FF14;
-            font-weight: bold;
-            font-size: 0.95rem;
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
         }
 
-        .form-group input, 
-        .form-group textarea {
+        .search-input {
             width: 100%;
-            padding: 12px 15px;
-            background-color: #333;
-            border: 1px solid #32870e50;
-            border-radius: 6px;
+            padding: 12px 45px 12px 15px;
+            border-radius: 25px;
+            background-color: #222;
+            border: 2px solid #32870e50;
             color: white;
+            font-size: 16px;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            box-sizing: border-box;
         }
 
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-group input:focus, 
-        .form-group textarea:focus {
+        .search-input:focus {
             outline: none;
             border-color: #39FF14;
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.2);
         }
 
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 30px;
+        .search-input::placeholder {
+            color: #888;
         }
 
-        .save-btn, .cancel-btn {
-            padding: 12px 25px;
-            border-radius: 6px;
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #32870e;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .btn-limpar {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #555;
+            padding: 10px 15px;
+            border-radius: 20px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-size: 1rem;
-            display: flex;
+            transition: all 0.3s ease;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-        .save-btn {
+        .btn-limpar:hover {
+            background-color: #444;
+            border-color: #666;
+            color: #39FF14;
+        }
+
+        .search-results {
+            color: #ccc;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #32870e50;
+        }
+        
+        th {
+            background-color: #111;
+            color: #39FF14;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #333;
+        }
+        
+        .product-image-cell {
+            width: 60px;
+            padding: 10px;
+        }
+        
+        .product-image {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .product-name {
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .product-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .product-stock, .product-price {
+            color: #ccc;
+        }
+        
+        .acoes {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-editar, .btn-excluir {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-editar {
+            color: #39FF14;
+        }
+        
+        .btn-excluir {
+            color: #ff3939;
+        }
+        
+        .btn-editar:hover, .btn-excluir:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: #333;
+            margin: 10% auto;
+            padding: 30px;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #32870e;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #32870e50;
+        }
+        
+        .modal-header h3 {
+            color: #39FF14;
+            margin: 0;
+        }
+        
+        .close {
+            color: #ccc;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close:hover {
+            color: #39FF14;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #222;
+            border: 1px solid #32870e50;
+            color: white;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #39FF14;
+            box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.2);
+        }
+        
+        .modal-footer {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .btn-cancelar {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #555;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-salvar {
             background-color: #32870e;
             color: white;
             border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-
-        .save-btn:hover {
-            background-color: #39FF14;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
-        }
-
-        .cancel-btn {
-            background-color: #333;
-            color: #ccc;
-            border: 1px solid #666;
-        }
-
-        .cancel-btn:hover {
+        
+        .btn-cancelar:hover {
             background-color: #444;
-            color: white;
-            transform: translateY(-3px);
-            border-color: #888;
+            border-color: #666;
+        }
+        
+        .btn-salvar:hover {
+            background-color: #39FF14;
+            color: #000;
+        }
+        
+        .mensagem {
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .sucesso {
+            background-color: rgba(57, 255, 20, 0.2);
+            color: #39FF14;
+            border: 1px solid #32870e;
+        }
+        
+        .erro {
+            background-color: rgba(255, 57, 57, 0.2);
+            color: #ff3939;
+            border: 1px solid #871e1e;
         }
 
-        /* Responsividade */
+        /* Animações para a tabela */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fadeIn {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #ccc;
+        }
+
+        .empty-state i {
+            font-size: 4em;
+            color: #32870e;
+            margin-bottom: 20px;
+        }
+
+        .empty-state p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #ccc;
+        }
+
+        .no-results i {
+            font-size: 3em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* Responsividade da tabela */
+        @media (max-width: 1200px) {
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+
         @media (max-width: 768px) {
-            header {
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+
+            .search-container {
                 flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+            
+            .produto-header {
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 15px;
-                padding: 1rem;
             }
             
             .section-title {
                 flex-direction: column;
-                gap: 15px;
                 align-items: flex-start;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 20px;
-            }
-
-            .search-container {
-                max-width: 100%;
+                gap: 15px;
             }
         }
     </style>
@@ -541,35 +538,54 @@
 </header>
 
 <main>
-    <div class="section-title">
-        <h1>Gerenciamento de Produtos</h1>
-        <button class="add-product-btn" onclick="openProductModal()">
-            <i class="fas fa-plus"></i> Adicionar Produto
-        </button>
-    </div>
-    
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar produtos por nome...">
-        <i class="fas fa-times clear-search" id="clearSearch" onclick="clearSearch()"></i>
-        <i class="fas fa-search search-icon"></i>
-    </div>
-    
-    <div class="products-grid" id="productsGrid">
-        <!-- Produtos serão inseridos aqui dinamicamente -->
-    </div>
+    <div class="container">
+        <div class="produto-header">
+            <h1><i class="fas fa-boxes"></i> Gerenciamento de Produtos</h1>
+            <button class="add-product-btn" onclick="openProductModal()">
+                <i class="fas fa-plus"></i> Adicionar Produto
+            </button>
+        </div>
 
-    <div class="no-results" id="noResults">
-        <i class="fas fa-search"></i>
-        <p>Nenhum produto encontrado</p>
-        <small>Tente pesquisar com outros termos</small>
+        <div class="mensagem sucesso" id="mensagemSucesso"></div>
+        <div class="mensagem erro" id="mensagemErro"></div>
+
+        <!-- Barra de pesquisa -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar produtos por nome...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button type="button" class="btn-limpar" id="btnLimpar">
+                <i class="fas fa-times"></i> Limpar
+            </button>
+            <span class="search-results" id="searchResults"></span>
+        </div>
+
+        <table id="tabelaProdutos">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Estoque</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="listaProdutos">
+                <!-- Os produtos serão inseridos aqui dinamicamente -->
+            </tbody>
+        </table>
     </div>
 </main>
 
 <!-- Modal para adicionar/editar produtos -->
 <div id="productModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeProductModal()">&times;</span>
-        <h2 id="modalTitle">Adicionar Produto</h2>
+        <div class="modal-header">
+            <h3 id="modalTitulo">Adicionar Produto</h3>
+            <span class="close" onclick="closeProductModal()">&times;</span>
+        </div>
         <form id="productForm">
             <input type="hidden" id="productId">
             <div class="form-group">
@@ -592,11 +608,26 @@
                 <label for="productImage">URL da Imagem</label>
                 <input type="text" id="productImage" placeholder="Deixe em branco para usar ícone padrão">
             </div>
-            <div class="form-actions">
-                <button type="button" class="cancel-btn" onclick="closeProductModal()">Cancelar</button>
-                <button type="submit" class="save-btn">Salvar</button>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancelar" onclick="closeProductModal()">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar</button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Modal de confirmação para exclusão -->
+<div id="confirmarExclusaoModal" class="modal">
+    <div class="modal-content" style="width: 30%;">
+        <div class="modal-header">
+            <h3>Confirmar Exclusão</h3>
+            <span class="close" id="fecharConfirmacao">&times;</span>
+        </div>
+        <p>Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.</p>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancelar" id="btnCancelarExclusao">Cancelar</button>
+            <button type="button" class="btn-salvar" id="btnConfirmarExclusao" style="background-color: #ff3939;">Excluir</button>
+        </div>
     </div>
 </div>
 
@@ -611,87 +642,134 @@
     ];
     
     let filteredProducts = [...products];
+    let productToDelete = null;
     
-    // Carregar produtos na página
-    function renderProducts(productsToRender = filteredProducts) {
-        const productsGrid = document.getElementById('productsGrid');
-        const noResults = document.getElementById('noResults');
-        
-        productsGrid.innerHTML = '';
-        
-        if (productsToRender.length === 0) {
-            noResults.style.display = 'block';
-            productsGrid.style.display = 'none';
-            return;
-        }
-        
-        noResults.style.display = 'none';
-        productsGrid.style.display = 'grid';
-        
-        productsToRender.forEach(product => {
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card';
-            productCard.innerHTML = `
-                <div class="product-image">
-                    ${product.image ? `<img src="${product.image}" alt="${product.name}">` : '<i class="fas fa-box"></i>'}
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">${product.name}</h3>
-                    <p>${product.description || 'Sem descrição'}</p>
-                    <div class="product-stock">
-                        <span>Estoque:</span>
-                        <span>${product.stock}</span>
-                    </div>
-                    <div class="product-price">
-                        <span>Preço:</span>
-                        <span>R$ ${product.price.toFixed(2)}</span>
-                    </div>
-                </div>
-                <div class="product-actions">
-                    <button class="edit-btn" onclick="editProduct(${product.id})">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="delete-btn" onclick="deleteProduct(${product.id})">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `;
-            productsGrid.appendChild(productCard);
-        });
-    }
+    // Elementos do DOM
+    const modal = document.getElementById('productModal');
+    const confirmarExclusaoModal = document.getElementById('confirmarExclusaoModal');
+    const btnLimpar = document.getElementById('btnLimpar');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const mensagemSucesso = document.getElementById('mensagemSucesso');
+    const mensagemErro = document.getElementById('mensagemErro');
+    const fecharConfirmacao = document.getElementById('fecharConfirmacao');
+    const btnCancelarExclusao = document.getElementById('btnCancelarExclusao');
+    const btnConfirmarExclusao = document.getElementById('btnConfirmarExclusao');
     
-    // Função de pesquisa
-    function searchProducts(searchTerm) {
+    // Função para filtrar produtos por nome
+    function filterProducts(searchTerm) {
         if (!searchTerm.trim()) {
             filteredProducts = [...products];
         } else {
+            const term = searchTerm.toLowerCase().trim();
             filteredProducts = products.filter(product => 
-                product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                product.name.toLowerCase().includes(term) ||
+                product.description.toLowerCase().includes(term)
             );
         }
-        renderProducts(filteredProducts);
-        
-        // Mostrar/esconder botão de limpar pesquisa
-        const clearButton = document.getElementById('clearSearch');
-        if (searchTerm.trim()) {
-            clearButton.style.display = 'block';
+        renderProducts();
+        updateSearchResults(searchTerm);
+    }
+    
+    // Função para atualizar o texto dos resultados da pesquisa
+    function updateSearchResults(searchTerm) {
+        if (!searchTerm.trim()) {
+            searchResults.textContent = '';
         } else {
-            clearButton.style.display = 'none';
+            const total = filteredProducts.length;
+            searchResults.textContent = `${total} resultado${total !== 1 ? 's' : ''} encontrado${total !== 1 ? 's' : ''}`;
         }
     }
     
-    // Limpar pesquisa
+    // Função para limpar a pesquisa
     function clearSearch() {
-        const searchInput = document.getElementById('searchInput');
         searchInput.value = '';
-        searchProducts('');
-        searchInput.focus();
+        filteredProducts = [...products];
+        renderProducts();
+        searchResults.textContent = '';
+    }
+    
+    // Função para renderizar os produtos na tabela
+    function renderProducts() {
+        const listaProdutos = document.getElementById('listaProdutos');
+        listaProdutos.innerHTML = '';
+        
+        // Remove elementos de estado vazio anteriores
+        const emptyState = document.querySelector('.empty-state');
+        const noResults = document.querySelector('.no-results');
+        if (emptyState) emptyState.remove();
+        if (noResults) noResults.remove();
+        
+        if (products.length === 0) {
+            // Estado vazio - nenhum produto cadastrado
+            const tabelaProdutos = document.getElementById('tabelaProdutos');
+            tabelaProdutos.style.display = 'none';
+            
+            const emptyStateDiv = document.createElement('div');
+            emptyStateDiv.className = 'empty-state';
+            emptyStateDiv.innerHTML = `
+                <i class="fas fa-box-open"></i>
+                <h2>Nenhum produto cadastrado</h2>
+                <p>Clique em "Adicionar Produto" para começar.</p>
+            `;
+            listaProdutos.parentNode.insertBefore(emptyStateDiv, listaProdutos);
+        } else if (filteredProducts.length === 0) {
+            // Nenhum resultado encontrado na pesquisa
+            const tabelaProdutos = document.getElementById('tabelaProdutos');
+            tabelaProdutos.style.display = 'none';
+            
+            const noResultsDiv = document.createElement('div');
+            noResultsDiv.className = 'no-results';
+            noResultsDiv.innerHTML = `
+                <i class="fas fa-search"></i>
+                <h2>Nenhum produto encontrado</h2>
+                <p>Tente pesquisar com outros termos.</p>
+            `;
+            listaProdutos.parentNode.insertBefore(noResultsDiv, listaProdutos);
+        } else {
+            // Mostrar produtos filtrados
+            const tabelaProdutos = document.getElementById('tabelaProdutos');
+            tabelaProdutos.style.display = 'table';
+            
+            filteredProducts.forEach(product => {
+                const tr = document.createElement('tr');
+                tr.className = 'fadeIn';
+                tr.innerHTML = `
+                    <td class="product-image-cell">
+                        ${product.image ? 
+                            `<img src="${product.image}" alt="${product.name}" class="product-image">` : 
+                            `<i class="fas fa-box" style="color: #32870e; font-size: 1.5rem;"></i>`}
+                    </td>
+                    <td>
+                        <div class="product-name">${product.name}</div>
+                    </td>
+                    <td>
+                        <div class="product-description">${product.description || 'Sem descrição'}</div>
+                    </td>
+                    <td class="product-stock">${product.stock}</td>
+                    <td class="product-price">R$ ${product.price.toFixed(2)}</td>
+                    <td class="acoes">
+                        <button class="btn-editar" data-id="${product.id}"><i class="fas fa-edit"></i></button>
+                        <button class="btn-excluir" data-id="${product.id}"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                listaProdutos.appendChild(tr);
+            });
+            
+            // Adicionar event listeners aos botões de ação
+            document.querySelectorAll('.btn-editar').forEach(btn => {
+                btn.addEventListener('click', () => editProduct(parseInt(btn.getAttribute('data-id'))));
+            });
+            
+            document.querySelectorAll('.btn-excluir').forEach(btn => {
+                btn.addEventListener('click', () => openDeleteModal(parseInt(btn.getAttribute('data-id'))));
+            });
+        }
     }
     
     // Abrir modal para adicionar/editar produto
     function openProductModal(productId = null) {
-        const modal = document.getElementById('productModal');
-        const modalTitle = document.getElementById('modalTitle');
+        const modalTitle = document.getElementById('modalTitulo');
         const form = document.getElementById('productForm');
         const idInput = document.getElementById('productId');
         const nameInput = document.getElementById('productName');
@@ -726,23 +804,36 @@
     
     // Fechar modal
     function closeProductModal() {
-        const modal = document.getElementById('productModal');
         modal.style.display = 'none';
     }
     
-    // Editar produto
-    function editProduct(productId) {
-        openProductModal(productId);
+    // Abrir modal de confirmação de exclusão
+    function openDeleteModal(productId) {
+        productToDelete = productId;
+        confirmarExclusaoModal.style.display = 'block';
     }
     
     // Excluir produto
-    function deleteProduct(productId) {
-        if (confirm('Tem certeza que deseja excluir este produto?')) {
-            products = products.filter(p => p.id !== productId);
-            // Atualizar também os produtos filtrados
-            const currentSearch = document.getElementById('searchInput').value;
-            searchProducts(currentSearch);
+    function deleteProduct() {
+        if (productToDelete) {
+            products = products.filter(p => p.id !== productToDelete);
+            confirmarExclusaoModal.style.display = 'none';
+            showMessage('Produto excluído com sucesso!', true);
+            
+            // Atualizar a lista filtrada e recarregar
+            filterProducts(searchInput.value);
         }
+    }
+    
+    // Mostrar mensagens de sucesso/erro
+    function showMessage(text, success) {
+        const element = success ? mensagemSucesso : mensagemErro;
+        element.textContent = text;
+        element.style.display = 'block';
+        
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, 3000);
     }
     
     // Manipular envio do formulário
@@ -770,29 +861,46 @@
             const index = products.findIndex(p => p.id === productId);
             if (index !== -1) {
                 products[index] = { ...products[index], ...productData };
+                showMessage('Produto atualizado com sucesso!', true);
             }
         } else {
             // Adicionar novo produto
             const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
             products.push({ id: newId, ...productData });
+            showMessage('Produto adicionado com sucesso!', true);
         }
         
-        // Atualizar a pesquisa atual
-        const currentSearch = document.getElementById('searchInput').value;
-        searchProducts(currentSearch);
         closeProductModal();
+        
+        // Atualizar a lista filtrada e recarregar
+        filterProducts(searchInput.value);
     });
     
-    // Event listener para pesquisa
-    document.getElementById('searchInput').addEventListener('input', function(e) {
-        searchProducts(e.target.value);
+    // Event Listeners para pesquisa
+    searchInput.addEventListener('input', (e) => {
+        filterProducts(e.target.value);
     });
     
-    // Fechar modal ao clicar fora dele
-    window.addEventListener('click', function(e) {
-        const modal = document.getElementById('productModal');
-        if (e.target === modal) {
+    btnLimpar.addEventListener('click', clearSearch);
+    
+    // Event Listeners para modais
+    fecharConfirmacao.addEventListener('click', () => {
+        confirmarExclusaoModal.style.display = 'none';
+    });
+    
+    btnCancelarExclusao.addEventListener('click', () => {
+        confirmarExclusaoModal.style.display = 'none';
+    });
+    
+    btnConfirmarExclusao.addEventListener('click', deleteProduct);
+    
+    // Fechamento do modal ao clicar fora dele
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
             closeProductModal();
+        }
+        if (event.target === confirmarExclusaoModal) {
+            confirmarExclusaoModal.style.display = 'none';
         }
     });
     
