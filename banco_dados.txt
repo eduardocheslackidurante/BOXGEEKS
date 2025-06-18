@@ -73,17 +73,20 @@ VALUES
 ('Léo Lins', 'vendedor', '(11) 97611-5654'),
 ('Dom Pedro II', 'entregador', '(21) 99835-4922');
 
+-- Tabela para pesquisa de clientes (corrigida para usar ID)
 CREATE TABLE IF NOT EXISTS pcleintes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  cpf VARCHAR(14),
-  FOREIGN KEY (cpf) REFERENCES clientes (cpf)
+  cliente_id INTEGER,
+  FOREIGN KEY (cliente_id) REFERENCES clientes (id)
 );
 
-INSERT INTO pcleintes (cpf)
+-- Inserção de dados na tabela pcleintes (usando IDs dos clientes)
+INSERT INTO pcleintes (cliente_id)
 VALUES 
-('123.456.789-08'),
-('987-654-321-45');
+(1),  -- Jair Bolsonaro
+(2);  -- Serjão Berranteiro
 
+-- Tabela para pesquisa de funcionários (por id e nome)
 CREATE TABLE IF NOT EXISTS pfuncionarios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   funcionario_id INTEGER,
@@ -92,10 +95,12 @@ CREATE TABLE IF NOT EXISTS pfuncionarios (
   FOREIGN KEY (nome) REFERENCES funcionario (nome)
 );
 
+-- Inserção de dados na tabela pfuncionarios
 INSERT INTO pfuncionarios (funcionario_id, nome)
 VALUES 
 (1, 'Léo Lins'),
 (2, 'Dom Pedro II');
+
 
 CREATE TABLE IF NOT EXISTS pprodutos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
