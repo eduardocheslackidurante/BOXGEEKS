@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Gerenciamento de Produtos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #000000e4;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #000;
+            color: #39FF14;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #30d95a;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(57, 255, 20, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 45px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.8));
+        }
+
+        .back-button {
+            background-color: rgba(50, 135, 14, 0.2);
+            color: #39FF14;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border: 1px solid #32870e;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .back-button:hover {
+            background-color: rgba(50, 135, 14, 0.4);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(57, 255, 20, 0.3);
+        }
+
+        .back-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover i {
+            transform: translateX(-3px);
+        }
+
+        main {
+            padding: 150px 30px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            margin-top: 60px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .produto-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #39FF14;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #32870e50;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+
+        .add-product-btn {
+            padding: 10px 20px;
+            background-color: #32870e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-product-btn:hover {
+            background-color: #39FF14;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
+        }
+
+        .add-product-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .add-product-btn:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Estilos da barra de pesquisa */
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border-radius: 25px;
+            background-color: #222;
+            border: 2px solid #32870e50;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #39FF14;
+            box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: #888;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #32870e;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .btn-limpar {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #555;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-limpar:hover {
+            background-color: #444;
+            border-color: #666;
+            color: #39FF14;
+        }
+
+        .search-results {
+            color: #ccc;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #32870e50;
+        }
+        
+        th {
+            background-color: #111;
+            color: #39FF14;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #333;
+        }
+        
+        .product-image-cell {
+            width: 60px;
+            padding: 10px;
+        }
+        
+        .product-name {
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .product-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .product-stock, .product-price {
+            color: #ccc;
+        }
+        
+        .acoes {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-editar, .btn-excluir {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-editar {
+            color: #39FF14;
+        }
+        
+        .btn-excluir {
+            color: #ff3939;
+        }
+        
+        .btn-editar:hover, .btn-excluir:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: #333;
+            margin: 10% auto;
+            padding: 30px;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #32870e;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #32870e50;
+        }
+        
+        .modal-header h3 {
+            color: #39FF14;
+            margin: 0;
+        }
+        
+        .close {
+            color: #ccc;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close:hover {
+            color: #39FF14;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #222;
+            border: 1px solid #32870e50;
+            color: white;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #39FF14;
+            box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.2);
+        }
+        
+        .modal-footer {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .btn-cancelar {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #555;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-salvar {
+            background-color: #32870e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-cancelar:hover {
+            background-color: #444;
+            border-color: #666;
+        }
+        
+        .btn-salvar:hover {
+            background-color: #39FF14;
+            color: #000;
+        }
+        
+        .mensagem {
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .sucesso {
+            background-color: rgba(57, 255, 20, 0.2);
+            color: #39FF14;
+            border: 1px solid #32870e;
+        }
+        
+        .erro {
+            background-color: rgba(255, 57, 57, 0.2);
+            color: #ff3939;
+            border: 1px solid #871e1e;
+        }
+
+        /* Animações para a tabela */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fadeIn {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #ccc;
+        }
+
+        .empty-state i {
+            font-size: 4em;
+            color: #32870e;
+            margin-bottom: 20px;
+        }
+
+        .empty-state p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #ccc;
+        }
+
+        .no-results i {
+            font-size: 3em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* Responsividade da tabela */
+        @media (max-width: 1200px) {
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+            
+            .produto-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img class="logo" src="imagens/Planet.png" alt="logo">
+        <img class="logo" src="imagens/Juke.png" alt="logo secundária">
+    </div>
+    <button class="back-button" onclick="window.location.href='registros.html'">
+        <i class="fas fa-arrow-left"></i> Voltar ao Painel
+    </button>
+</header>
+
+<main>
+    <div class="container">
+        <div class="produto-header">
+            <h1><i class="fas fa-boxes"></i> Gerenciamento de Produtos</h1>
+            <button class="add-product-btn" onclick="openProductModal()">
+                <i class="fas fa-plus"></i> Adicionar Produto
+            </button>
+        </div>
+
+        <div class="mensagem sucesso" id="mensagemSucesso"></div>
+        <div class="mensagem erro" id="mensagemErro"></div>
+
+        <!-- Barra de pesquisa -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar produtos por nome...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button type="button" class="btn-limpar" id="btnLimpar">
+                <i class="fas fa-times"></i> Limpar
+            </button>
+            <span class="search-results" id="searchResults"></span>
+        </div>
+
+        <table id="tabelaProdutos">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Estoque</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="listaProdutos">
+                <!-- Os produtos serão inseridos aqui dinamicamente -->
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- Modal para adicionar/editar produtos -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitulo">Adicionar Produto</h3>
+            <span class="close" onclick="closeProductModal()">&times;</span>
+        </div>
+        <form id="productForm">
+            <input type="hidden" id="productId">
+            <div class="form-group">
+                <label for="productName">Nome do Produto</label>
+                <input type="text" id="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="productDescription">Descrição</label>
+                <textarea id="productDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="productStock">Estoque</label>
+                <input type="number" id="productStock" min="0" value="0">
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Preço (R$)</label>
+                <input type="number" id="productPrice" min="0" step="0.01" value="0.00">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancelar" onclick="closeProductModal()">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de confirmação para exclusão -->
+<div id="confirmarExclusaoModal" class="modal">
+    <div class="modal-content" style="width: 30%;">
+        <div class="modal-header">
+            <h3>Confirmar Exclusão</h3>
+            <span class="close" id="fecharConfirmacao">&times;</span>
+        </div>
+        <p>Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.</p>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancelar" id="btnCancelarExclusao">Cancelar</button>
+            <button type="button" class="btn-salvar" id="btnConfirmarExclusao" style="background-color: #ff3939;">Excluir</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dados iniciais dos produtos
+    let products = [
+        { id: 1, name: 'JBL Boombox 3', description: 'caixa potente a prova de água', stock: 5, price: 2499.99},
+        { id: 2, name: 'JBL Tune 720BT', description: 'dura até 76 horas de uso constante', stock: 10, price: 439.99,},
+        { id: 3, name: 'Amvox caixa amplificada ACA 1000', description: 'torre de som amplificada', stock: 5, price: 1049.99},
+        { id: 4, name: 'Amvox caixa amplificada ACA 150 pop', description: 'qualidade e portabilidade', stock: 10, price: 219.99},
+        { id: 5, name: 'Headset Redragon Zeus Pro', description: 'potente e confortável', stock: 10, price: 149.99}
+    ];
+    
+    let filteredProducts = [...products];
+    let productToDelete = null;
+    
+    // Elementos do DOM
+    const modal = document.getElementById('productModal');
+    const confirmarExclusaoModal = document.getElementById('confirmarExclusaoModal');
+    const btnLimpar = document.getElementById('btnLimpar');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const mensagemSucesso = document.getElementById('mensagemSucesso');
+    const mensagemErro = document.getElementById('mensagemErro');
+    const fecharConfirmacao = document.getElementById('fecharConfirmacao');
+    const btnCancelarExclusao = document.getElementById('btnCancelarExclusao');
+    const btnConfirmarExclusao = document.getElementById('btnConfirmarExclusao');
+    
+    // Função para filtrar produtos por nome
+    function filterProducts(searchTerm) {
+        if (!searchTerm.trim()) {
+            filteredProducts = [...products];
+        } else {
+            const term = searchTerm.toLowerCase().trim();
+            filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(term) ||
+                product.description.toLowerCase().includes(term)
+            );
+        }
+        renderProducts();
+        updateSearchResults(searchTerm);
+    }
+    
+    // Função para atualizar o texto dos resultados da pesquisa
+    function updateSearchResults(searchTerm) {
+        if (!searchTerm.trim()) {
+            searchResults.textContent = '';
+        } else {
+            const total = filteredProducts.length;
+            searchResults.textContent = `${total} resultado${total !== 1 ? 's' : ''} encontrado${total !== 1 ? 's' : ''}`;
+        }
+    }
+    
+    // Função para limpar a pesquisa
+    function clearSearch() {
+        searchInput.value = '';
+        filteredProducts = [...products];
+        renderProducts();
+        searchResults.textContent = '';
+    }
+    
+    // Função para renderizar os produtos na tabela
+    function renderProducts() {
+        const listaProdutos = document.getElementById('listaProdutos');
+        listaProdutos.innerHTML = '';
+        
+        // Remove elementos de estado vazio anteriores
+        const emptyState = document.querySelector('.empty-state');
+        const noResults = document.querySelector('.no-results');
+        if (emptyState) emptyState.remove();
+        if (noResults) noResults.remove();
+        
+        if (products.length === 0) {
+            // Estado vazio - nenhum produto cadastrado
+            const tabelaProdutos = document.getElementById('tabelaProdutos');
+            tabelaProdutos.style.display = 'none';
+            
+            const emptyStateDiv = document.createElement('div');
+            emptyStateDiv.className = 'empty-state';
+            emptyStateDiv.innerHTML = `
+                <i class="fas fa-box-open"></i>
+                <h2>Nenhum produto cadastrado</h2>
+                <p>Clique em "Adicionar Produto" para começar.</p>
+            `;
+            listaProdutos.parentNode.insertBefore(emptyStateDiv, listaProdutos);
+        } else if (filteredProducts.length === 0) {
+            // Nenhum resultado encontrado na pesquisa
+            const tabelaProdutos = document.getElementById('tabelaProdutos');
+            tabelaProdutos.style.display = 'none';
+            
+            const noResultsDiv = document.createElement('div');
+            noResultsDiv.className = 'no-results';
+            noResultsDiv.innerHTML = `
+                <i class="fas fa-search"></i>
+                <h2>Nenhum produto encontrado</h2>
+                <p>Tente pesquisar com outros termos.</p>
+            `;
+            listaProdutos.parentNode.insertBefore(noResultsDiv, listaProdutos);
+        } else {
+            // Mostrar produtos filtrados
+            const tabelaProdutos = document.getElementById('tabelaProdutos');
+            tabelaProdutos.style.display = 'table';
+            
+            filteredProducts.forEach(product => {
+                const tr = document.createElement('tr');
+                tr.className = 'fadeIn';
+                tr.innerHTML = `
+                    <td>
+                        <div class="product-name">${product.name}</div>
+                    </td>
+                    <td>
+                        <div class="product-description">${product.description || 'Sem descrição'}</div>
+                    </td>
+                    <td class="product-stock">${product.stock}</td>
+                    <td class="product-price">R$ ${product.price.toFixed(2)}</td>
+                    <td class="acoes">
+                        <button class="btn-editar" data-id="${product.id}"><i class="fas fa-edit"></i></button>
+                        <button class="btn-excluir" data-id="${product.id}"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                listaProdutos.appendChild(tr);
+            });
+            
+            // Adicionar event listeners aos botões de ação
+            document.querySelectorAll('.btn-editar').forEach(btn => {
+                btn.addEventListener('click', () => editProduct(parseInt(btn.getAttribute('data-id'))));
+            });
+            
+            document.querySelectorAll('.btn-excluir').forEach(btn => {
+                btn.addEventListener('click', () => openDeleteModal(parseInt(btn.getAttribute('data-id'))));
+            });
+        }
+    }
+    
+    // Abrir modal para adicionar/editar produto
+    function openProductModal(productId = null) {
+        const modalTitle = document.getElementById('modalTitulo');
+        const form = document.getElementById('productForm');
+        const idInput = document.getElementById('productId');
+        const nameInput = document.getElementById('productName');
+        const descInput = document.getElementById('productDescription');
+        const stockInput = document.getElementById('productStock');
+        const priceInput = document.getElementById('productPrice');
+        
+        // Limpar formulário
+        form.reset();
+        
+        if (productId) {
+            // Editar produto existente
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                modalTitle.textContent = 'Editar Produto';
+                idInput.value = product.id;
+                nameInput.value = product.name;
+                descInput.value = product.description || '';
+                stockInput.value = product.stock;
+                priceInput.value = product.price;
+            }
+        } else {
+            // Adicionar novo produto
+            modalTitle.textContent = 'Adicionar Produto';
+            idInput.value = '';
+        }
+        
+        modal.style.display = 'block';
+    }
+    
+    // Fechar modal
+    function closeProductModal() {
+        modal.style.display = 'none';
+    }
+    
+    // Abrir modal de confirmação de exclusão
+    function openDeleteModal(productId) {
+        productToDelete = productId;
+        confirmarExclusaoModal.style.display = 'block';
+    }
+    
+    // Excluir produto
+    function deleteProduct() {
+        if (productToDelete) {
+            products = products.filter(p => p.id !== productToDelete);
+            confirmarExclusaoModal.style.display = 'none';
+            showMessage('Produto excluído com sucesso!', true);
+            
+            // Atualizar a lista filtrada e recarregar
+            filterProducts(searchInput.value);
+        }
+    }
+    
+    // Mostrar mensagens de sucesso/erro
+    function showMessage(text, success) {
+        const element = success ? mensagemSucesso : mensagemErro;
+        element.textContent = text;
+        element.style.display = 'block';
+        
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, 3000);
+    }
+    
+    // Manipular envio do formulário
+    document.getElementById('productForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const idInput = document.getElementById('productId');
+        const nameInput = document.getElementById('productName');
+        const descInput = document.getElementById('productDescription');
+        const stockInput = document.getElementById('productStock');
+        const priceInput = document.getElementById('productPrice');
+        
+        const productData = {
+            name: nameInput.value,
+            description: descInput.value,
+            stock: parseInt(stockInput.value) || 0,
+            price: parseFloat(priceInput.value) || 0
+        };
+        
+        if (idInput.value) {
+            // Atualizar produto existente
+            const productId = parseInt(idInput.value);
+            const index = products.findIndex(p => p.id === productId);
+            if (index !== -1) {
+                products[index] = { ...products[index], ...productData };
+                showMessage('Produto atualizado com sucesso!', true);
+            }
+        } else {
+            // Adicionar novo produto
+            const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+            products.push({ id: newId, ...productData });
+            showMessage('Produto adicionado com sucesso!', true);
+        }
+        
+        closeProductModal();
+        
+        // Atualizar a lista filtrada e recarregar
+        filterProducts(searchInput.value);
+    });
+    
+    // Event Listeners para pesquisa
+    searchInput.addEventListener('input', (e) => {
+        filterProducts(e.target.value);
+    });
+    
+    btnLimpar.addEventListener('click', clearSearch);
+    
+    // Event Listeners para modais
+    fecharConfirmacao.addEventListener('click', () => {
+        confirmarExclusaoModal.style.display = 'none';
+    });
+    
+    btnCancelarExclusao.addEventListener('click', () => {
+        confirmarExclusaoModal.style.display = 'none';
+    });
+    
+    btnConfirmarExclusao.addEventListener('click', deleteProduct);
+    
+    // Fechamento do modal ao clicar fora dele
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeProductModal();
+        }
+        if (event.target === confirmarExclusaoModal) {
+            confirmarExclusaoModal.style.display = 'none';
+        }
+    });
+    
+    // Inicializar a página
+    document.addEventListener('DOMContentLoaded', function() {
+        renderProducts();
+    });
+</script>
+
+</body>
+</html>

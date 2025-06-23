@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pr-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="style.css">
+     <script src="javascript.js"></script>
+    <title>JukeBOX</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container"> <!--Deixa ambas as Logos na mesma linha-->
+            <img class="logo" src="imagens/parana.png" alt="logo secundária">
+            <img class="logo" src="imagens/ccm.png" alt="logo">
+            <img class="logo" src="imagens/Juke.png" alt="logo secundária">
+        </div>
+        <form class="form" id="loginForm"> <!--O Form é como se fosse um Card porém mais interagivel-->
+            <h2>Login</h2>
+            <input type="email" placeholder="Email" required> <!--Placeholder é oque o Input mostra quando está vazio-->
+            <input type="password" placeholder="Senha" required> <!--Type Email é oque impede o usuário de passar sem botar um "@", já Type Password é oque transforma os caracteres em Asteriscos-->
+            <button type="submit" formaction="registros.html">Entrar</button>
+            <div class="toggle-button" onclick="toggleForms()">Não tem uma conta? Cadastre-se</div> <!--Toggleforms() é responsável por alterar o Form de Login para Cadastro e vice-versa-->
+        </form>
+
+        <form class="form" id="registerForm" style="display: none;">
+            <h2>Cadastro</h2>
+            <input type="text" placeholder="Nome" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Senha" required>
+            <button type="submit" formaction="registros.html">Cadastrar</button>
+            <div class="toggle-button" onclick="toggleForms()">Já tem uma conta? Entre</div>
+        </form>
+    </div>
+</body>
+</html>
