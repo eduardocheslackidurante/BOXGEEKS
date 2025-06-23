@@ -47,14 +47,15 @@ VALUES
 CREATE TABLE IF NOT EXISTS funcionario (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR(100) NOT NULL,
+  cpf VARCHAR(14) Not NULL UNIQUE,
   funcao VARCHAR(30),
   telefone VARCHAR(15)
 );
 
 INSERT INTO funcionario (nome, cpf, telefone, funcao)
 VALUES
-('Jair Bolsonaro', '123.456.789-08', '(45) 99999-9991', 'entregador')
-('Léo Lins', '020.459.607-23' '(11) 97611-5654)', 'vendedor'
+('Jair Bolsonaro', '123.456.789-08', '(45) 99999-9991', 'entregador'),
+('Léo Lins', '020.459.607-23', '(11) 97611-5654)', 'vendedor'),
 ('Dom Pedro II', '196.328.070-90', '(21) 99835-4922', 'entregador');
 
 CREATE TABLE IF NOT EXISTS pcleintes (
@@ -78,8 +79,9 @@ CREATE TABLE IF NOT EXISTS pfuncionarios (
 
 INSERT INTO pfuncionarios (funcionario_id, nome)
 VALUES 
-(1, 'Léo Lins'),
-(2, 'Dom Pedro II');
+(1, 'Jair Bolsonaro'),
+(2, 'Léo Lins'),
+(3, 'Dom Pedro II');
 
 
 CREATE TABLE IF NOT EXISTS pprodutos (
