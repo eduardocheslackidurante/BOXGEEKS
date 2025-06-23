@@ -1,4 +1,4 @@
-- deixar os produtos que nem uma lista (tipo a da página dos clientes)
+ ̶-̶ ̶d̶e̶i̶x̶a̶r̶ ̶o̶s̶ ̶p̶r̶o̶d̶u̶t̶o̶s̶ ̶q̶u̶e̶ ̶n̶e̶m̶ ̶u̶m̶a̶ ̶l̶i̶s̶t̶a̶ ̶(̶t̶i̶p̶o̶ ̶a̶ ̶d̶a̶ ̶p̶á̶g̶i̶n̶a̶ ̶d̶o̶s̶ ̶c̶l̶i̶e̶n̶t̶e̶s̶)̶
 - colocar os registros mais importantes primeiro (1 - compras, 2 - produtos, 3 - clientes, 4 - funcionario, 5 - vendedor)
 - adicionar o registro 'agenda' (ou qualquer coisa para ver os pedidos pendentes)
 - melhorar responsividade
