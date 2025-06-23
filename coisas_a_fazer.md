@@ -1,7 +1,6 @@
 - colocar os registros mais importantes primeiro (1 - compras, 2 - produtos, 3 - clientes, 4 - funcionario, 5 - vendedor)
 - adicionar o registro 'agenda' (ou qualquer coisa para ver os pedidos pendentes)
 - melhorar responsividade
-- deixar o sistema um pouco mais claro (fundo pode ser cinza)
 - adicionar menu retratil
 - deixar o sistema com design mais simples
 - colocar tudo em um html só (opcional)
