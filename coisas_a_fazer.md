@@ -2,7 +2,6 @@
 - adicionar o registro 'agenda' (ou qualquer coisa para ver os pedidos pendentes)
 - melhorar responsividade
 - adicionar menu retratil
-- deixar o sistema com design mais simples
 - colocar tudo em um html só (opcional)
 - tornar produtos pesquisaveis por id (terá que adicionar id automatico aos produtos)
 - fazer a tabela de movimento e estoque no banco de dados 
