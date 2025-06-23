@@ -24,7 +24,7 @@ INSERT INTO clientes (nome, cpf, telefone, email, endereco)
 VALUES ('Leão XI', '987-654-321-12', '(45) 97475-7457', 'emailvaticano@coisas.xyz', 'rua da ponte, 23, santo padre - ES');
 
 INSERT INTO clientes (nome, cpf, telefone, email, endereco)
-VALUES ('Mauro Camarão', '987-654-321-78', '(45) 97475-7457', 'emailcamarão@coisas.xyz', 'rua camilles, 19, touro - ES');
+VALUES ('Mauro Camarão', '987-654-321-78', '(45) 97475-7457', 'emailcamarao@coisas.xyz', 'rua camilles, 19, touro - ES');
 
 -- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
@@ -51,10 +51,11 @@ CREATE TABLE IF NOT EXISTS funcionario (
   telefone VARCHAR(15)
 );
 
-INSERT INTO funcionario (nome, funcao, telefone)
+INSERT INTO funcionario (nome, cpf, telefone, funcao)
 VALUES
-('Léo Lins', 'vendedor', '(11) 97611-5654'),
-('Dom Pedro II', 'entregador', '(21) 99835-4922');
+('Jair Bolsonaro', '123.456.789-08', '(45) 99999-9991', 'entregador')
+('Léo Lins', '020.459.607-23' '(11) 97611-5654)', 'vendedor'
+('Dom Pedro II', '196.328.070-90', '(21) 99835-4922', 'entregador');
 
 CREATE TABLE IF NOT EXISTS pcleintes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
