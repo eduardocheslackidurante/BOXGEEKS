@@ -439,7 +439,7 @@
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Telefone</th>
-                <th>Email</th>
+                <th>Função</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -471,8 +471,8 @@
                 <input type="text" id="telefone" required maxlength="15" placeholder="(00) 00000-0000">
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" required placeholder="exemplo@email.com">
+                <label for="funcao">Função:</label>
+                <input type="text" id="funcao" required placeholder="Ex: Entregador, Vendedor">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
@@ -505,12 +505,26 @@
             nome: 'Jair Bolsonaro',
             cpf: '020.459.607-23',
             telefone: '(61) 99907-4852',
-            email: 'bolsonaro18@gmail.com'
+            funcao: 'entregador'
+        },
+        {
+            id: 2,
+            nome: 'Léo Lins',
+            cpf: '020.459.607-23',
+            telefone: '(61) 99907-4852',
+            funcao: 'vendedor'
+        },
+        {
+            id: 3,
+            nome: 'Dom Pedro II',
+            cpf: '196.328.070-90',
+            telefone: '(21) 99835-4922',
+            funcao: 'entregador'
         }
     ];
     
     // Variáveis globais
-    let proximoId = 2;
+    let proximoId = 4;
     let funcionarioParaExcluir = null;
     let funcionariosFiltrados = [...funcionarios]; // Array para armazenar os funcionários filtrados
     
@@ -537,7 +551,7 @@
     const nomeInput = document.getElementById('nome');
     const cpfInput = document.getElementById('cpf');
     const telefoneInput = document.getElementById('telefone');
-    const emailInput = document.getElementById('email');
+    const funcaoInput = document.getElementById('funcao');
     const modalTitulo = document.getElementById('modalTitulo');
     
     // Função para filtrar funcionários por ID
@@ -622,7 +636,7 @@
                     <td>${funcionario.nome}</td>
                     <td>${funcionario.cpf}</td>
                     <td>${funcionario.telefone}</td>
-                    <td>${funcionario.email}</td>
+                    <td>${funcionario.funcao}</td>
                     <td class="acoes">
                         <button class="btn-editar" data-id="${funcionario.id}"><i class="fas fa-edit"></i></button>
                         <button class="btn-excluir" data-id="${funcionario.id}"><i class="fas fa-trash"></i></button>
@@ -659,7 +673,7 @@
             nomeInput.value = funcionario.nome;
             cpfInput.value = funcionario.cpf;
             telefoneInput.value = funcionario.telefone;
-            emailInput.value = funcionario.email;
+            funcaoInput.value = funcionario.funcao;
             modal.style.display = 'block';
         }
     }
@@ -678,18 +692,18 @@
         const nome = nomeInput.value;
         const cpf = cpfInput.value;
         const telefone = telefoneInput.value;
-        const email = emailInput.value;
+        const funcao = funcaoInput.value;
         
         if (funcionarioIdInput.value) {
             // Editar funcionário existente
             const index = funcionarios.findIndex(f => f.id === parseInt(funcionarioIdInput.value));
             if (index !== -1) {
-                funcionarios[index] = { id: parseInt(funcionarioIdInput.value), nome, cpf, telefone, email };
+                funcionarios[index] = { id: parseInt(funcionarioIdInput.value), nome, cpf, telefone, funcao };
                 mostrarMensagem('Funcionário atualizado com sucesso!', true);
             }
         } else {
             // Adicionar novo funcionário
-            funcionarios.push({ id, nome, cpf, telefone, email });
+            funcionarios.push({ id, nome, cpf, telefone, funcao });
             proximoId++;
             mostrarMensagem('Funcionário adicionado com sucesso!', true);
         }
@@ -808,6 +822,5 @@
         carregarFuncionarios();
     });
 </script>
-
 </body>
 </html>
