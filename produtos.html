@@ -14,7 +14,7 @@
         }
 
         body {
-            background-color: #000;
+            background-color: #000000e4;
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
@@ -241,13 +241,6 @@
         .product-image-cell {
             width: 60px;
             padding: 10px;
-        }
-        
-        .product-image {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 4px;
         }
         
         .product-name {
@@ -564,7 +557,6 @@
         <table id="tabelaProdutos">
             <thead>
                 <tr>
-                    <th>Imagem</th>
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Estoque</th>
@@ -604,10 +596,6 @@
                 <label for="productPrice">Preço (R$)</label>
                 <input type="number" id="productPrice" min="0" step="0.01" value="0.00">
             </div>
-            <div class="form-group">
-                <label for="productImage">URL da Imagem</label>
-                <input type="text" id="productImage" placeholder="Deixe em branco para usar ícone padrão">
-            </div>
             <div class="modal-footer">
                 <button type="button" class="btn-cancelar" onclick="closeProductModal()">Cancelar</button>
                 <button type="submit" class="btn-salvar">Salvar</button>
@@ -634,11 +622,11 @@
 <script>
     // Dados iniciais dos produtos
     let products = [
-        { id: 1, name: 'JBL Boombox 3', description: 'caixa potente a prova de água', stock: 5, price: 2499.99, image: 'imagens/boombox.png' },
-        { id: 2, name: 'JBL Tune 720BT', description: 'dura até 76 horas de uso constante', stock: 10, price: 439.99, image: 'imagens/tune.png' },
-        { id: 3, name: 'Amvox caixa amplificada ACA 1000', description: 'torre de som amplificada', stock: 5, price: 1049.99, image: 'imagens/torre.png' },
-        { id: 4, name: 'Amvox caixa amplificada ACA 150 pop', description: 'qualidade e portabilidade', stock: 10, price: 219.99, image: 'imagens/caixa.png' },
-        { id: 5, name: 'Headset Redragon Zeus Pro', description: 'potente e confortável', stock: 10, price: 149.99, image: 'imagens/fone.png' }
+        { id: 1, name: 'JBL Boombox 3', description: 'caixa potente a prova de água', stock: 5, price: 2499.99},
+        { id: 2, name: 'JBL Tune 720BT', description: 'dura até 76 horas de uso constante', stock: 10, price: 439.99,},
+        { id: 3, name: 'Amvox caixa amplificada ACA 1000', description: 'torre de som amplificada', stock: 5, price: 1049.99},
+        { id: 4, name: 'Amvox caixa amplificada ACA 150 pop', description: 'qualidade e portabilidade', stock: 10, price: 219.99},
+        { id: 5, name: 'Headset Redragon Zeus Pro', description: 'potente e confortável', stock: 10, price: 149.99}
     ];
     
     let filteredProducts = [...products];
@@ -735,11 +723,6 @@
                 const tr = document.createElement('tr');
                 tr.className = 'fadeIn';
                 tr.innerHTML = `
-                    <td class="product-image-cell">
-                        ${product.image ? 
-                            `<img src="${product.image}" alt="${product.name}" class="product-image">` : 
-                            `<i class="fas fa-box" style="color: #32870e; font-size: 1.5rem;"></i>`}
-                    </td>
                     <td>
                         <div class="product-name">${product.name}</div>
                     </td>
@@ -776,7 +759,6 @@
         const descInput = document.getElementById('productDescription');
         const stockInput = document.getElementById('productStock');
         const priceInput = document.getElementById('productPrice');
-        const imageInput = document.getElementById('productImage');
         
         // Limpar formulário
         form.reset();
@@ -791,7 +773,6 @@
                 descInput.value = product.description || '';
                 stockInput.value = product.stock;
                 priceInput.value = product.price;
-                imageInput.value = product.image || '';
             }
         } else {
             // Adicionar novo produto
@@ -845,14 +826,12 @@
         const descInput = document.getElementById('productDescription');
         const stockInput = document.getElementById('productStock');
         const priceInput = document.getElementById('productPrice');
-        const imageInput = document.getElementById('productImage');
         
         const productData = {
             name: nameInput.value,
             description: descInput.value,
             stock: parseInt(stockInput.value) || 0,
-            price: parseFloat(priceInput.value) || 0,
-            image: imageInput.value
+            price: parseFloat(priceInput.value) || 0
         };
         
         if (idInput.value) {
