@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
 DROP TABLE IF EXISTS funcionario;
 DROP TABLE IF EXISTS pclientes;
+DROP TABLE if EXISTS pprodutos;
 DROP TABLE IF EXISTS consultas;
 
 -- Tabela de clientes
@@ -57,6 +58,7 @@ VALUES
 ('Léo Lins', 'vendedor', '(11) 97611-5654'),
 ('Dom Pedro II', 'entregador', '(21) 99835-4922');
 
+--pesquisa de clientes
 CREATE TABLE IF NOT EXISTS pclientes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   cliente_id INTEGER,
@@ -68,6 +70,7 @@ VALUES
 (1),  -- Jair Bolsonaro
 (2);  -- Serjão Berranteiro
 
+--pesquisa funcionario
 CREATE TABLE IF NOT EXISTS pfuncionarios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   funcionario_id INTEGER,
@@ -81,13 +84,14 @@ VALUES
 (1, 'Léo Lins'),
 (2, 'Dom Pedro II');
 
-
+-- pesquisa de produto
 CREATE TABLE IF NOT EXISTS pprodutos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR(100),
   FOREIGN KEY (nome) REFERENCES produtos (nome)
 );
 
+--pesquisa de produtos
 INSERT INTO pprodutos (nome)
 VALUES 
 ('JBL Boombox 3'),
@@ -96,17 +100,24 @@ VALUES
 ('Amvox Caixa Amplificadora ACA 150 Pop'),
 ('Headset Redragon Zeus Pro');
 
-CREATE TABLE if not EXISTS consultas (
-  id_f INT,
-  id_c INT,
-  nome VARCHAR(50),
-  FOREIGN KEY (id_f) REFERENCES funcionario (id),
-  FOREIGN KEY (id_c) REFERENCES clientes (id),
-  FOREIGN KEY (nome) REFERENCES produtos (nome)
+CREATE TABLE IF NOT EXISTS consultas (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo_consulta VARCHAR(50) NOT NULL,  -- 'cliente', 'produto', 'funcionario', etc.
+  id_consulta INTEGER,                 -- ID do item consultado (opcional)
+  termo_busca VARCHAR(30),            -- Termo usado na busca (se aplicável)
+  data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+  usuario VARCHAR(50)                  -- Quem realizou a consulta
 );
 
-INSERT INTO consultas(id_f, id_c, nome)
-VALUES(1, 1, 'JBL Boombox 3');
+-- Inserindo algumas consultas de exemplo
+INSERT INTO consultas (tipo_consulta, id_consulta, termo_busca, usuario)
+VALUES 
+('cliente', 1, NULL, 'admin'),
+('produto', NULL, 'JBL', 'vendedor1'),
+('funcionario', 2, NULL, 'gerente'),
+('produto', NULL, 'Amvox', 'vendedor2'),
+('cliente', NULL, 'Serjão', 'atendente');
+
 
 SELECT * FROM clientes;
 SELECT * FROM produtos;
@@ -114,4 +125,4 @@ SELECT * FROM funcionario;
 SELECT * FROM pclientes;
 SELECT * FROM pfuncionarios;
 SELECT * FROM pprodutos;
-SELECT * FROM consultas;
+SELECT * FROM consultas LIMIT 5;
