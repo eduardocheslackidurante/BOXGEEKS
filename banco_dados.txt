@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
 DROP TABLE IF EXISTS funcionario;
-DROP TABLE IF EXISTS pcleintes;
+DROP TABLE IF EXISTS pclientes;
 
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
@@ -56,13 +56,13 @@ VALUES
 ('Léo Lins', 'vendedor', '(11) 97611-5654'),
 ('Dom Pedro II', 'entregador', '(21) 99835-4922');
 
-CREATE TABLE IF NOT EXISTS pcleintes (
+CREATE TABLE IF NOT EXISTS pclientes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   cliente_id INTEGER,
   FOREIGN KEY (cliente_id) REFERENCES clientes (id)
 );
 
-INSERT INTO pcleintes (cliente_id)
+INSERT INTO pclientes (cliente_id)
 VALUES 
 (1),  -- Jair Bolsonaro
 (2);  -- Serjão Berranteiro
@@ -98,6 +98,6 @@ VALUES
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM funcionario;
-SELECT * FROM pcleintes;
+SELECT * FROM pclientes;
 SELECT * FROM pfuncionarios;
 SELECT * FROM pprodutos;
