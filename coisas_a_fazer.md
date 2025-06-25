@@ -1,4 +1,4 @@
-- colocar os registros mais importantes primeiro (1 - compras, 2 - produtos, 3 - clientes, 4 - funcionario, 5 - vendedor)
+- c̶o̶l̶o̶c̶a̶r̶ ̶o̶s̶ ̶r̶e̶g̶i̶s̶t̶r̶o̶s̶ ̶m̶a̶i̶s̶ ̶i̶m̶p̶o̶r̶t̶a̶n̶t̶e̶s̶ ̶p̶r̶i̶m̶e̶i̶r̶o̶ ̶(̶1̶ ̶-̶ ̶c̶o̶m̶p̶r̶a̶s̶,̶ ̶2̶ ̶-̶ ̶p̶r̶o̶d̶u̶t̶o̶s̶,̶ ̶3̶ ̶-̶ ̶c̶l̶i̶e̶n̶t̶e̶s̶,̶ ̶4̶ ̶-̶ ̶f̶u̶n̶c̶i̶o̶n̶a̶r̶i̶o̶,̶ ̶5̶ ̶-̶ ̶v̶e̶n̶d̶e̶d̶o̶r̶)̶
 - adicionar o registro 'agenda' (ou qualquer coisa para ver os pedidos pendentes)
 - melhorar responsividade
 - adicionar menu retratil
