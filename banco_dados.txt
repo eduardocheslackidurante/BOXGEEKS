@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
 DROP TABLE IF EXISTS funcionario;
 DROP TABLE IF EXISTS pclientes;
+DROP TABLE IF EXISTS consultas;
 
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
@@ -95,9 +96,22 @@ VALUES
 ('Amvox Caixa Amplificadora ACA 150 Pop'),
 ('Headset Redragon Zeus Pro');
 
+CREATE TABLE if not EXISTS consultas (
+  id_f INT,
+  id_c INT,
+  nome VARCHAR(50),
+  FOREIGN KEY (id_f) REFERENCES funcionario (id),
+  FOREIGN KEY (id_c) REFERENCES clientes (id),
+  FOREIGN KEY (nome) REFERENCES produtos (nome)
+);
+
+INSERT INTO consultas(id_f, id_c, nome)
+VALUES(1, 1, 'JBL Boombox 3');
+
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM funcionario;
 SELECT * FROM pclientes;
 SELECT * FROM pfuncionarios;
 SELECT * FROM pprodutos;
+SELECT * FROM consultas;
