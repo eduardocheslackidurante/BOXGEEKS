@@ -2,5 +2,5 @@
 - melhorar responsividade
 - adicionar menu retratil
 - tornar produtos pesquisaveis por id (terá que adicionar id automatico aos produtos)
-- terminar a página de estoque (só vai funcionar quando ligar com o sql)
+- adicionar botão de vboltar na pagina estoque.html e algumas coiusas q nao lembro(só vai funcionar quando ligar com o sql)
 - 
