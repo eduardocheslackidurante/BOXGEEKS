@@ -2,3 +2,4 @@
 - melhorar responsividade
 - adicionar menu retratil
 - tornar produtos pesquisaveis por id (terá que adicionar id automatico aos produtos)
+- terminar a página de estoque 
