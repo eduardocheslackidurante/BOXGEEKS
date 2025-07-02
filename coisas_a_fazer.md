@@ -2,4 +2,5 @@
 - melhorar responsividade
 - adicionar menu retratil
 - tornar produtos pesquisaveis por id (terá que adicionar id automatico aos produtos)
-- terminar a página de estoque 
+- terminar a página de estoque (só vai funcionar quando ligar com o sql)
+- 
