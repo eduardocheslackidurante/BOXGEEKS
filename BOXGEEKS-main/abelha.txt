@@ -1,0 +1,6 @@
+INNER JOIN usuarios ON emprestimos.id_usuario = usuarios.id_usuario
+
+INNER JOIN livros ON emprestimos.id_livro = usuarios.id_livro
+
+INNER JOIN autores ON emprestimos.id_autor = usuarios.id_autor
+WHERE emprestimos.tipo = "c"						
