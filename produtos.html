@@ -550,16 +550,15 @@
 <script>
     // Dados dos produtos (simulando um banco de dados)
     let products = [
-        { id: 1001, name: "Smartphone Premium", description: "Modelo topo de linha com câmera tripla e 256GB de armazenamento", category: "eletronicos", price: 3499.90, stock: 45 },
-        { id: 1002, name: "Notebook Profissional", description: "Processador i7, 16GB RAM, SSD 512GB e tela Full HD", category: "informatica", price: 4799.90, stock: 12 },
-        { id: 1003, name: "Fones Bluetooth", description: "Cancelamento de ruído e até 30h de bateria", category: "acessorios", price: 899.90, stock: 28 },
-        { id: 1004, name: "Tablet Avançado", description: "Tela retina 10.5\", caneta stylus incluída", category: "eletronicos", price: 2199.90, stock: 15 },
-        { id: 1005, name: "Smartwatch Pro", description: "Monitor de batimento cardíaco e GPS integrado", category: "eletronicos", price: 1299.90, stock: 0 },
-        { id: 1006, name: "Controle Sem Fio", description: "Compatível com múltiplas plataformas de jogos", category: "acessorios", price: 349.90, stock: 56 }
+        { id: 1001, name: "JBL Boombox 3", description: "caixa potente a prova de água", category: "caixa de som", price: 2499.90, stock: 5 },
+        { id: 1002, name: "JBL Tune 720BT", description: "dura até 76 horas de uso constante", category: "caixa de som", price: 439.90, stock: 12 },
+        { id: 1003, name: "Amvox caixa amplificada ACA 1000", description: "torre de som amplificada", category: "caixa de som", price: 1049.99, stock: 5 },
+        { id: 1004, name: "Amvox caixa amplificada ACA 150 pop", description: "qualidade e portabilidade", category: "eletronicos", price: 219.90, stock: 10 },
+        { id: 1005, name: "Headset Redragon Zeus Pro", description: "potente e confortável", category: "eletronicos", price: 149.90, stock: 10 },
     ];
     
     // Variáveis globais
-    let nextId = 1007;
+    let nextId = 1006;
     let productToDelete = null;
     let filteredProducts = [...products];
     
