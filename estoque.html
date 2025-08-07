@@ -68,7 +68,7 @@
         }
 
         .btn-voltar {
-            background-color: #6c757d;
+            background-color: #27ff2bde;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
@@ -80,7 +80,7 @@
         }
 
         .btn-voltar:hover {
-            background-color: #5a6268;
+            background-color: #2fff00af;
         }
 
         .mensagem {
@@ -276,11 +276,11 @@
 <script>
     // Dados de exemplo para demonstração
     let produtos = [
-        { nome: "Produto A", quantidade: 50 },
-        { nome: "Produto B", quantidade: 15 },
-        { nome: "Produto C", quantidade: 3 },
-        { nome: "Produto D", quantidade: 100 },
-        { nome: "Produto E", quantidade: 25 }
+        { nome: "JBL Boombox 3", quantidade: 5 },
+        { nome: "JBL Tune 720BT", quantidade: 10 },
+        { nome: "Amvox caixa amplificada ACA 1000", quantidade: 5 },
+        { nome: "Amvox caixa amplificada ACA 150 pop", quantidade: 10 },
+        { nome: "Headset Redragon Zeus Pro", quantidade: 10 }
     ];
 
     // Função para renderizar a tabela
@@ -293,9 +293,9 @@
             
             // Determinar classe CSS baseada na quantidade
             let classeQuantidade = '';
-            if (produto.quantidade <= 10) {
+            if (produto.quantidade <= 3) {
                 classeQuantidade = 'quantidade-baixa';
-            } else if (produto.quantidade <= 30) {
+            } else if (produto.quantidade <= 5) {
                 classeQuantidade = 'quantidade-media';
             } else {
                 classeQuantidade = 'quantidade-alta';
