@@ -2,4 +2,4 @@
 - melhorar responsividade
 - adicionar menu retratil
 - adicionar botão de vboltar na pagina estoque.html e algumas coiusas q nao lembro(só vai funcionar quando ligar com o sql)
-- 
+- adicionar página de cadastro e que tenha as informações do banco de dados
