@@ -1,6 +1,8 @@
+
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
 DROP TABLE IF EXISTS funcionario;
+drop TABLE if exists estoque;
 DROP TABLE IF EXISTS pclientes;
 DROP TABLE if EXISTS pprodutos;
 DROP TABLE IF EXISTS consultas;
@@ -58,6 +60,12 @@ VALUES
 ('Léo Lins', 'vendedor', '(11) 97611-5654'),
 ('Dom Pedro II', 'entregador', '(21) 99835-4922');
 
+create table if not exists estoque (
+  id integer primary key AUTOINCREMENT,
+  nome varchar(50) not NULL,
+  quantidade INTEGER NOT NULL
+ );
+ 
 --pesquisa de clientes
 CREATE TABLE IF NOT EXISTS pclientes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -122,7 +130,4 @@ VALUES
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM funcionario;
-SELECT * FROM pclientes;
-SELECT * FROM pfuncionarios;
-SELECT * FROM pprodutos;
-SELECT * FROM consultas LIMIT 5;
+SELECT * FROM estoque;
