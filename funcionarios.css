@@ -69,13 +69,13 @@ main {
     margin-bottom: 2rem;
 }
 
-.section-title {
+.titulo-secao {
     color: var(--primary-color);
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
 
-.section-subtitle {
+.subtitulo-secao {
     color: var(--text-light);
 }
 
@@ -122,7 +122,7 @@ main {
     font-size: 1rem;
 }
 
-.status-value {
+.valor-status {
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--secondary-color);
@@ -305,19 +305,19 @@ tr:hover {
     border-bottom: 1px solid #eee;
 }
 
-.titulo-modal {
+.modal-title {
     color: var(--primary-color);
     font-size: 1.5rem;
 }
 
-.fechar-modal {
+.close-modal {
     color: var(--text-light);
     font-size: 1.5rem;
     cursor: pointer;
     transition: color 0.3s;
 }
 
-.fechar-modal:hover {
+.close-modal:hover {
     color: var(--primary-color);
 }
 
