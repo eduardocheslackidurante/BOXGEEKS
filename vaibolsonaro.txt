@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="funcionarios.css>
+    <script src= "funcionarios.js" defer></script>
+    
+    <title>Gerenciamento de Funcionários</title>
+    
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img class="logo" src="imagens/Planet.png" alt="logo">
+        <img class="logo" src="imagens/Juke.png" alt="logo secundária">
+        <a href="registros.html" class="back-button">
+            <link rel="stylesheet" href="funcionarios.css">
+            <script src="funcionarios.js" defer></script>
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+</header>
+
+<main>
+    <div class="dashboard-header">
+        <div>
+            <h1 class="section-title">Gerenciamento de Funcionários</h1>
+            <p class="section-subtitle">Controle completo da sua equipe</p>
+        </div>
+        <div class="quick-actions">
+            <button class="quick-action-btn" id="btnAddEmployee">
+                <i class="fas fa-plus"></i> Novo Funcionário
+            </button>
+            <button class="quick-action-btn">
+                <i class="fas fa-file-export"></i> Exportar
+            </button>
+        </div>
+    </div>
+    
+    <div class="status-bar">
+        <div class="status-item">
+            <h3>Total de Funcionários</h3>
+            <div class="status-value">42</div>
+        </div>
+        <div class="status-item">
+            <h3>Ativos</h3>
+            <div class="status-value">38</div>
+        </div>
+        <div class="status-item">
+            <h3>Férias</h3>
+            <div class="status-value">3</div>
+        </div>
+        <div class="status-item">
+            <h3>Desligados</h3>
+            <div class="status-value">1</div>
+        </div>
+    </div>
+    
+    <div class="alert alert-success" id="successAlert"></div>
+    <div class="alert alert-error" id="errorAlert"></div>
+    
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar funcionários...">
+        </div>
+        <button class="btn-limpar" id="btnClearSearch">
+            <i class="fas fa-times"></i> Limpar
+        </button>
+        <span class="search-results" id="searchResults"></span>
+    </div>
+    
+    <div class="table-container">
+        <table id="employeesTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Departamento</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="employeesList">
+        </table>
+    </div>
+</main>
+
+<!-- Modal para adicionar/editar funcionário -->
+<div id="employeeModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modalTitle">Adicionar Funcionário</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <form id="employeeForm">
+            <input type="hidden" id="employeeId">
+            <div class="form-group">
+                <label for="FuncionarioNome">Nome Completo</label>
+                <input type="text" id="employeeName" required>
+            </div>
+            <div class="form-group">
+                <label for="FuncionarioCPF">CPF</label>
+                <input type="text" id="employeeCpf" placeholder="000.000.000-00" required>
+            </div>
+            <div class="form-group">
+                <label for="FuncionarioTelefone">Telefone</label>
+                <input type="text" id="employeePhone" placeholder="(00) 00000-0000" required>
+            </div>
+            <div class="form-group">
+                <label for="FuncionarioCargo">Cargo</label>
+                <input type="text" id="employeePosition" required>
+            </div>
+            <div class="form-group">
+                <label for="employeeDepartment">Departamento</label>
+                <select id="employeeDepartment" required>
+                    <option value="">Selecione...</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="Financeiro">Financeiro</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="TI">TI</option>
+                    <option value="RH">Recursos Humanos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="employeeStatus">Status</label>
+                <select id="employeeStatus" required>
+                    <option value="Ativo">Ativo</option>
+                    <option value="Férias">Férias</option>
+                    <option value="Afastado">Afastado</option>
+                    <option value="Desligado">Desligado</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" id="btnCancel">Cancelar</button>
+                <button type="submit" class="btn-save">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de confirmação -->
+<div id="confirmModal" class="modal confirm-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Confirmar Exclusão</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>Tem certeza que deseja excluir este funcionário? Esta ação não pode ser desfeita.</p>
+        </div>
+        <div class="form-actions">
+            <button type="button" class="btn-cancel" id="btnCancelDelete">Cancelar</button>
+            <button type="button" class="btn-save btn-danger" id="btnConfirmDelete">Excluir</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --light-color: #ecf0f1;
+    --hover-color: #2980b9;
+    --text-color: #333;
+    --text-light: #7f8c8d;
+    --white: #fff;
+    --danger-color: #e74c3c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: var(--text-color);
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.botao-voltar {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.botao-voltar:hover {
+    background-color: var(--hover-color);
+}
+
+main {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.cabecalho-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.titulo-secao {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitulo-secao {
+    color: var(--text-light);
+}
+
+.acoes-rapidas {
+    display: flex;
+    gap: 1rem;
+}
+
+.botao-acao-rapida {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.botao-acao-rapida:hover {
+    background-color: var(--hover-color);
+}
+
+.barra-status {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.item-status {
+    padding: 0 1rem;
+}
+
+.item-status h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.valor-status {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+/* Estilos da barra de pesquisa */
+.container-pesquisa {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.caixa-pesquisa {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.entrada-pesquisa {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: all 0.3s;
+    padding-left: 40px;
+}
+
+.entrada-pesquisa:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.icone-pesquisa {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.botao-limpar {
+    background-color: var(--light-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.botao-limpar:hover {
+    background-color: #d5dbdb;
+}
+
+.resultados-pesquisa {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Estilos da tabela */
+.container-tabela {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+}
+
+tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.edit-btn {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--secondary-color);
+}
+
+.edit-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.delete-btn {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger-color);
+}
+
+.delete-btn:hover {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Estados vazios */
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow: auto;
+}
+
+.conteudo-modal {
+    background-color: var(--white);
+    margin: 5% auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cabecalho-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.titulo-modal {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.fechar-modal {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.fechar-modal:hover {
+    color: var(--primary-color);
+}
+
+.grupo-formulario {
+    margin-bottom: 1.2rem;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.grupo-formulario input, 
+.grupo-formulario select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.grupo-formulario input:focus, 
+.grupo-formulario select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.acoes-formulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.botao-cancelar {
+    background-color: var(--light-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-cancelar:hover {
+    background-color: #d5dbdb;
+}
+
+.botao-salvar {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-salvar:hover {
+    background-color: var(--hover-color);
+}
+
+/* Modal de confirmação */
+.modal-confirmacao .conteudo-modal {
+    max-width: 400px;
+}
+
+.corpo-modal {
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.botao-perigo {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.botao-perigo:hover {
+    background-color: #c0392b;
+}
+
+/* Mensagens */
+.alerta {
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    display: none;
+}
+
+.alerta-sucesso {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #27ae60;
+    border: 1px solid #2ecc71;
+}
+
+.alerta-erro {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #c0392b;
+    border: 1px solid #e74c3c;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cabecalho-painel {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .acoes-rapidas {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .barra-status {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .container-pesquisa {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .caixa-pesquisa {
+        max-width: none;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .conteudo-modal {
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
+              
