@@ -24,11 +24,11 @@
 <main>
     <div class="dashboard-header">
         <div>
-            <h1 class="section-title">Gerenciamento de Funcionários</h1>
-            <p class="section-subtitle">Controle completo da sua equipe</p>
+            <h1 class="titulo-secao">Gerenciamento de Funcionários</h1>
+            <p class="subtitulo-secao">Controle completo da sua equipe</p>
         </div>
         <div class="quick-actions">
-            <button class="quick-action-btn" id="btnAddEmployee">
+            <button class="quick-action-btn" id="botaoAdicionarFuncionario">
                 <i class="fas fa-plus"></i> Novo Funcionário
             </button>
             <button class="quick-action-btn">
@@ -40,31 +40,31 @@
     <div class="status-bar">
         <div class="status-item">
             <h3>Total de Funcionários</h3>
-            <div class="status-value">42</div>
+            <div class="valor-status">42</div>
         </div>
         <div class="status-item">
             <h3>Ativos</h3>
-            <div class="status-value">38</div>
+            <div class="valor-status">38</div>
         </div>
         <div class="status-item">
             <h3>Férias</h3>
-            <div class="status-value">3</div>
+            <div class="valor-status">3</div>
         </div>
         <div class="status-item">
             <h3>Desligados</h3>
-            <div class="status-value">1</div>
+            <div class="valor-status">1</div>
         </div>
     </div>
     
-    <div class="alert alert-success" id="successAlert"></div>
-    <div class="alert alert-error" id="errorAlert"></div>
+    <div class="alert alert-success" id="alertaSucesso"></div>
+    <div class="alert alert-error" id="alertaErro"></div>
     
     <div class="search-container">
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
             <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar funcionários...">
         </div>
-        <button class="btn-limpar" id="btnClearSearch">
+        <button class="btn-limpar" id="botaoLimparPesquisa">
             <i class="fas fa-times"></i> Limpar</button>
         <span class="search-results" id="searchResults"></span>
     </div>
@@ -81,7 +81,7 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody id="employeesList">
+            <tbody id="listaFuncionarios">
             </tbody>
         </table>
     </div>
@@ -89,13 +89,13 @@
 
 <!-- Modal para adicionar/editar funcionário -->
 <div id="employeeModal" class="modal">
-    <div class="modal-content">
+    <div class="conteudo-modal">
         <div class="modal-header">
             <h3 class="modal-title" id="modalTitle">Adicionar Funcionário</h3>
             <span class="close-modal">&times;</span>
         </div>
         <form id="employeeForm">
-            <input type="hidden" id="employeeId">
+            <input type="hidden" id="idFuncionario">
             <div class="form-group">
                 <label for="funcionarioNome">Nome Completo</label>
                 <input type="text" id="funcionarioNome" required>
@@ -106,7 +106,7 @@
             </div>
             <div class="form-group">
                 <label for="FuncionarioTelefone">Telefone</label>
-                <input type="text" id="employeePhone" placeholder="(00) 00000-0000" required>
+                <input type="text" id="telefoneFuncionario" placeholder="(00) 00000-0000" required>
             </div>
             <div class="form-group">
                 <label for="funcionarioCargo">Cargo</label>
