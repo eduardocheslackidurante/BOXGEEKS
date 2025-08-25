@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="funcionarios.css>
-    <script src="funcionarios.js" defer></script>
+    <link rel="stylesheet" href="funcionarios.css">
+    <script src= "funcionarios.js" defer></script>
     
     <title>Gerenciamento de Funcionários</title>
     
@@ -17,10 +17,7 @@
         <img class="logo" src="imagens/Planet.png" alt="logo">
         <img class="logo" src="imagens/Juke.png" alt="logo secundária">
         <a href="registros.html" class="back-button">
-            <link rel="stylesheet" href="funcionarios.css">
-            <script src="funcionarios.js" defer></script>
-            <i class="fas fa-arrow-left"></i> Voltar
-        </a>
+            <i class="fas fa-arrow-left"></i> Voltar</a>
     </div>
 </header>
 
@@ -68,13 +65,12 @@
             <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar funcionários...">
         </div>
         <button class="btn-limpar" id="btnClearSearch">
-            <i class="fas fa-times"></i> Limpar
-        </button>
+            <i class="fas fa-times"></i> Limpar</button>
         <span class="search-results" id="searchResults"></span>
     </div>
     
     <div class="table-container">
-        <table id="employeesTable">
+        <table id="table-funcionarios">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -86,90 +82,6 @@
                 </tr>
             </thead>
             <tbody id="employeesList">
-                <!-- Funcionário 1 -->
-                <tr>
-                    <td>1001</td>
-                    <td>João Silva</td>
-                    <td>Gerente de Vendas</td>
-                    <td>Comercial</td>
-                    <td><span class="status-badge active">Ativo</span></td>
-                    <td class="actions">
-                        <button class="action-btn edit-btn" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Excluir">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                
-                <!-- Funcionário 2 -->
-                <tr>
-                    <td>1002</td>
-                    <td>Maria Oliveira</td>
-                    <td>Desenvolvedor Sênior</td>
-                    <td>TI</td>
-                    <td><span class="status-badge active">Ativo</span></td>
-                    <td class="actions">
-                        <button class="action-btn edit-btn" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Excluir">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                
-                <!-- Funcionário 3 -->
-                <tr>
-                    <td>1003</td>
-                    <td>Carlos Souza</td>
-                    <td>Analista Financeiro</td>
-                    <td>Financeiro</td>
-                    <td><span class="status-badge vacation">Férias</span></td>
-                    <td class="actions">
-                        <button class="action-btn edit-btn" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Excluir">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                
-                <!-- Funcionário 4 -->
-                <tr>
-                    <td>1004</td>
-                    <td>Ana Santos</td>
-                    <td>Designer</td>
-                    <td>Marketing</td>
-                    <td><span class="status-badge active">Ativo</span></td>
-                    <td class="actions">
-                        <button class="action-btn edit-btn" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Excluir">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                
-                <!-- Funcionário 5 -->
-                <tr>
-                    <td>1005</td>
-                    <td>Pedro Costa</td>
-                    <td>Assistente Administrativo</td>
-                    <td>Administrativo</td>
-                    <td><span class="status-badge inactive">Desligado</span></td>
-                    <td class="actions">
-                        <button class="action-btn edit-btn" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Excluir">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -185,24 +97,24 @@
         <form id="employeeForm">
             <input type="hidden" id="employeeId">
             <div class="form-group">
-                <label for="employeeName">Nome Completo</label>
-                <input type="text" id="employeeName" required>
+                <label for="funcionarioNome">Nome Completo</label>
+                <input type="text" id="funcionarioNome" required>
             </div>
             <div class="form-group">
-                <label for="employeeCpf">CPF</label>
-                <input type="text" id="employeeCpf" placeholder="000.000.000-00" required>
+                <label for="funcionarioCpf">CPF</label>
+                <input type="text" id="funcionarioCpf" placeholder="000.000.000-00" required>
             </div>
             <div class="form-group">
-                <label for="employeePhone">Telefone</label>
+                <label for="FuncionarioTelefone">Telefone</label>
                 <input type="text" id="employeePhone" placeholder="(00) 00000-0000" required>
             </div>
             <div class="form-group">
-                <label for="employeePosition">Cargo</label>
-                <input type="text" id="employeePosition" required>
+                <label for="funcionarioCargo">Cargo</label>
+                <input type="text" id="funcionarioCargo" required>
             </div>
             <div class="form-group">
-                <label for="employeeDepartment">Departamento</label>
-                <select id="employeeDepartment" required>
+                <label for="funcionarioDepartamento">Departamento</label>
+                <select id="funcionarioDepartamento" required>
                     <option value="">Selecione...</option>
                     <option value="Administrativo">Administrativo</option>
                     <option value="Comercial">Comercial</option>
@@ -213,8 +125,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="employeeStatus">Status</label>
-                <select id="employeeStatus" required>
+                <label for="funcionarioStatus">Status</label>
+                <select id="funcionarioStatus" required>
                     <option value="Ativo">Ativo</option>
                     <option value="Férias">Férias</option>
                     <option value="Afastado">Afastado</option>
