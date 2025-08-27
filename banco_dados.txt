@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
 DROP TABLE IF EXISTS funcionario;
@@ -18,10 +17,9 @@ CREATE TABLE IF NOT EXISTS clientes (
 CREATE TABLE IF NOT EXISTS produtos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR(100) NOT NULL,
-  descricao CHAR NOT NULL,
-  categoria CHAR not NULL,
+  quantidade INTEGER NOT NULL,
   preco DECIMAL(8,2) NOT NULL, 
-  quantidade_estoque INTEGER NOT NULL,
+ 		VARCHAR(50)
 );
 
 CREATE TABLE IF NOT EXISTS funcionario (
@@ -36,7 +34,7 @@ create table if not exists estoque (
   nome varchar(50) not NULL,
   quantidade INTEGER NOT NULL
  );
-
+ 
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM funcionario;
