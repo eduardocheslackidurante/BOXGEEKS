@@ -5,33 +5,32 @@ drop TABLE if exists estoque;
 
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_clientes INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR(100) NOT NULL,
-  cpf VARCHAR(14) NOT NULL UNIQUE,
+  cpf_cliente VARCHAR(14) NOT NULL UNIQUE,
   telefone VARCHAR(15),
   email VARCHAR(100)
-  
-);
+ );
 
 -- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  nome VARCHAR(100) NOT NULL,
-  preco DECIMAL(8,2) NOT NULL,
-  categoria TEXT,
-  descricao TEXT,
+  id_produtos INTEGER PRIMARY KEY AUTOINCREMENT,
+  nomeprod VARCHAR(100) NOT NULL,
+  productPrice DECIMAL(8,2) NOT NULL,
+  categoriaprod TEXT,
+  productDescription TEXT,
   quantidade_estoque INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS funcionario (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_funcionario INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR(100) NOT NULL,
   funcao VARCHAR(30),
   telefone VARCHAR(15)
 );
 
 create table if not exists estoque (
-  id integer primary key AUTOINCREMENT,
+  id_estoque integer primary key AUTOINCREMENT,
   nome varchar(50) not NULL,
   quantidade INTEGER NOT NULL
  );
