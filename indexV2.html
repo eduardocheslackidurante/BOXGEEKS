@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+        <div class="logos">
+                <img src="parana.png" alt="Logo Paraná">
+                <img src="ccm.png" alt="Logo CCM">
+                <img src="Juke.png" alt="Logo Juke">
+            </div>
+            
+            <div class="form_login">
+                <form class="form" id="loginform">
+                    <h2>Login</h2>
+    <!-- temporariamente tipo texto, trocar pra email quando estiver pronto/for colocar no banco de dados
+                                  |
+                                  V                                                         -->
+                    <input type="text" placeholder="Email" required>
+                    <input type="password" placeholder="Senha" required>
+                    <button type="submit" formaction="registros.html">Entrar</button>
+                </form>
+            </div>
+            <!-- adicionar onclick="nome da classe()">cadastro< quando for fazer o bano de dados, um que troque para o cadastro
+                                     |
+                                     V                                        -->
+            <div class="toggle-button">Não tem uma conta? Cadastre-se</div>
+        </form>
+
+        <form class="form" id="registerForm" style="display: none;">
+            <h2>Cadastro</h2>
+            <input type="text" placeholder="Nome" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Senha" required>
+            <button type="submit" formaction="registros.html">Cadastrar</button>
+            <div class="toggle-button" >Já tem uma conta? Entre</div>
+                   <!-- mesma coisa aqui na linha acima -->
+        </form>
+
+
+</body>
+</html>
