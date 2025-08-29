@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
 DROP TABLE IF EXISTS funcionario;
-drop TABLE if exists estoque;
 
 -- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
@@ -23,19 +22,15 @@ CREATE TABLE IF NOT EXISTS produtos (
 );
 
 CREATE TABLE IF NOT EXISTS funcionario (
-  id_funcionario INTEGER PRIMARY KEY AUTOINCREMENT,
-  nome VARCHAR(100) NOT NULL,
-  funcao VARCHAR(30),
-  telefone VARCHAR(15)
+  idfunc INTEGER PRIMARY KEY AUTOINCREMENT,
+  funcnome VARCHAR(100) NOT NULL,
+  cpffunc
+  telfunc VARCHAR(15),
+  funccargo VARCHAR(30),
+  funcdepartamento TEXT,
+  funcstatus TEXT
 );
 
-create table if not exists estoque (
-  id_estoque integer primary key AUTOINCREMENT,
-  nome varchar(50) not NULL,
-  quantidade INTEGER NOT NULL
- );
- 
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM funcionario;
-SELECT * FROM estoque;
