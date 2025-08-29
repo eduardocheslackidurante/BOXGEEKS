@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
 DROP TABLE IF EXISTS funcionario;
 
--- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
   id_clientes INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR(100) NOT NULL,
@@ -11,7 +10,6 @@ CREATE TABLE IF NOT EXISTS clientes (
   email VARCHAR(100)
  );
 
--- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
   id_produtos INTEGER PRIMARY KEY AUTOINCREMENT,
   nomeprod VARCHAR(100) NOT NULL,
@@ -24,13 +22,16 @@ CREATE TABLE IF NOT EXISTS produtos (
 CREATE TABLE IF NOT EXISTS funcionario (
   idfunc INTEGER PRIMARY KEY AUTOINCREMENT,
   funcnome VARCHAR(100) NOT NULL,
-  cpffunc
+  cpffunc TEXT,
   telfunc VARCHAR(15),
   funccargo VARCHAR(30),
   funcdepartamento TEXT,
   funcstatus TEXT
 );
 
+SELECT * FROM clientes;
+SELECT * FROM produtos;
+SELECT * FROM funcionario;
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM funcionario;
