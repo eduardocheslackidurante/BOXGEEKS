@@ -3,74 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="funcionarios.css">
-    <script src= "funcionarios.js" defer></script>
-    
-    <title>Gerenciamento de Funcionários</title>
-    
+    <title>funcioaniros</title>
 </head>
-<body>
-
 <header>
-    <div class="logo-container">
-        <img class="logo" src="imagens/Planet.png" alt="logo">
-        <img class="logo" src="imagens/Juke.png" alt="logo secundária">
-        <a href="registros.html" class="back-button">
-            <i class="fas fa-arrow-left"></i> Voltar</a>
+    <div class="logos">
+        <img src="Planet.png" alt="planet">
+        <img src="Juke.png" alt="logojuke">
+        <a href="registros.html">
+            <button class="voltar">voltar</button>
+        </a>
     </div>
+
 </header>
 
-<main>
-    <div class="dashboard-header">
-        <div>
-            <h1 class="titulo-secao">Gerenciamento de Funcionários</h1>
-            <p class="subtitulo-secao">Controle completo da sua equipe</p>
-        </div>
-        <div class="quick-actions">
-            <button class="quick-action-btn" id="botaoAdicionarFuncionario">
-                <i class="fas fa-plus"></i> Novo Funcionário
-            </button>
-            <button class="quick-action-btn">
-                <i class="fas fa-file-export"></i> Exportar
-            </button>
-        </div>
-    </div>
-    
-    <div class="status-bar">
-        <div class="status-item">
-            <h3>Total de Funcionários</h3>
-            <div class="valor-status">42</div>
-        </div>
-        <div class="status-item">
-            <h3>Ativos</h3>
-            <div class="valor-status">38</div>
-        </div>
-        <div class="status-item">
-            <h3>Férias</h3>
-            <div class="valor-status">3</div>
-        </div>
-        <div class="status-item">
-            <h3>Desligados</h3>
-            <div class="valor-status">1</div>
-        </div>
-    </div>
-    
-    <div class="alert alert-success" id="alertaSucesso"></div>
-    <div class="alert alert-error" id="alertaErro"></div>
-    
-    <div class="search-container">
-        <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar funcionários...">
-        </div>
-        <button class="btn-limpar" id="botaoLimparPesquisa">
-            <i class="fas fa-times"></i> Limpar</button>
-        <span class="search-results" id="searchResults"></span>
-    </div>
-    
-    <div class="table-container">
-        <table id="table-funcionarios">
+<body>
+        <main>
+            <div class="conteudo">
+                <h1>gerenciamento de fufiofafiof</h1>
+                    <button class="addfunc" id="btnaddfunc">
+                        <i class="iconeaddfunc"></i> Novo Funcionário</button>
+                </div>
+                <div class="statusdofunc">
+                    <div class="itemstatus">
+                        <h3>Total de Funcionários</h3>
+                        <div class="valorstauts">69</div>
+                    </div>
+                    <div class="itemstatus">
+                        <h3>Ativos</h3>
+                        <div class="valorstauts">42</div>
+                    </div>
+                    <div class="itemstatus">
+                        <h3>Férias</h3>
+                        <div class="valorstauts">13</di>
+                    </div>
+                    <div class="itemstatus">
+                        <h3>Desligados</h3>
+                        <div class="valorstauts">-1</div>
+                    </div>
+                </div>
+                
+                <!-- talvez tenha que colocar em table e div -->
             <thead>
                 <tr>
                     <th>ID</th>
@@ -81,81 +53,76 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody id="listaFuncionarios">
-            </tbody>
-        </table>
-    </div>
-</main>
 
-<!-- Modal para adicionar/editar funcionário -->
-<div id="employeeModal" class="modal">
-    <div class="conteudo-modal">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modalTitle">Adicionar Funcionário</h3>
-            <span class="close-modal">&times;</span>
-        </div>
-        <form id="employeeForm">
-            <input type="hidden" id="idFuncionario">
-            <div class="form-group">
-                <label for="funcionarioNome">Nome Completo</label>
-                <input type="text" id="funcionarioNome" required>
-            </div>
-            <div class="form-group">
-                <label for="funcionarioCpf">CPF</label>
-                <input type="text" id="funcionarioCpf" placeholder="000.000.000-00" required>
-            </div>
-            <div class="form-group">
-                <label for="FuncionarioTelefone">Telefone</label>
-                <input type="text" id="telefoneFuncionario" placeholder="(00) 00000-0000" required>
-            </div>
-            <div class="form-group">
-                <label for="funcionarioCargo">Cargo</label>
-                <input type="text" id="funcionarioCargo" required>
-            </div>
-            <div class="form-group">
-                <label for="funcionarioDepartamento">Departamento</label>
-                <select id="funcionarioDepartamento" required>
-                    <option value="">Selecione...</option>
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Comercial">Comercial</option>
-                    <option value="Financeiro">Financeiro</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="TI">TI</option>
-                    <option value="RH">Recursos Humanos</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="funcionarioStatus">Status</label>
-                <select id="funcionarioStatus" required>
-                    <option value="Ativo">Ativo</option>
-                    <option value="Férias">Férias</option>
-                    <option value="Afastado">Afastado</option>
-                    <option value="Desligado">Desligado</option>
-                </select>
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn-cancel" id="btnCancel">Cancelar</button>
-                <button type="submit" class="btn-save">Salvar</button>
-            </div>
-        </form>
-    </div>
-</div>
+               
 
-<!-- Modal de confirmação -->
-<div id="modalConfirmacao" class="modal modal-confirmacao">
-    <div class="conteudo-modal">
-        <div class="modal-header">
-            <h3 class="titulo-modal">Confirmar Exclusão</h3>
-            <span class="fechar-modal">&times;</span>
-        </div>
-        <div class="modal-body">
-            <p>Tem certeza que deseja excluir este funcionário? Esta ação não pode ser desfeita.</p>
-        </div>
-        <div class="form-actions">
-            <button type="button" class="btn-cancel" id="btnCancelDelete">Cancelar</button>
-            <button type="button" class="btn-save btn-danger" id="btnConfirmarExclusao">Excluir</button>
-        </div>
-    </div>
-</div>
+                 <div id="modalfunc" class="modal">
+                    <div class="conteudo_domodal">
+                        <div class="headermodal">
+                            <h3 class="titulomodal" id="titulomodal2">Adicionar Funcionário</h3>
+                            <span class="fecharmodal">&times;</span>
+                        </div>
+                        <form id="formfunc">
+                            <input type="hidden" id="idfunc">
+                            <div class="grupoform">
+                                <label for="nomefunc">Nome Completo</label>
+                                <input type="text" id="funcnome" required>
+                            </div>
+                            <div class="grupoform">
+                                <label for="cpffunc">CPF</label>
+                                <input type="text" id="funcionariocpf" placeholder="000.000.000-00" required>
+                            </div>
+                            <div class="grupoform">
+                                <label for="functel">Telefone</label>
+                                <input type="text" id="telfunc" placeholder="(00) 00000-0000" required>
+                            </div>
+                            <div class="grupoform">
+                                <label for="cargofunc">Cargo</label>
+                                <input type="text" id="funccargo" required>
+                            </div>
+                            <div class="grupoform">
+                                <label for="funcdepartamento">Departamento</label>
+                                <select id="funcdepartamento" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="Administrativo">Administrativo</option>
+                                    <option value="Comercial">Comercial</option>
+                                    <option value="Financeiro">Financeiro</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="TI">TI</option>
+                                </select>
+                            </div>
+                            <div class="grupoform">
+                                <label for="funcstatus">Status</label>
+                                <select id="funcstatus" required>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Férias">Férias</option>
+                                    <option value="Afastado">Afastado</option>
+                                    <option value="Desligado">Desligado</option>
+                                </select>
+                            </div>
+                            <div class="formacoes">
+                                <button type="button" class="cancelarbtn" id="cancelar">Cancelar</button>
+                                <button type="submit" class="salvarbtn">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="modalconfirm" class="modalarmacao">
+                    <div class="conteudomodal">
+                        <div class="modalheader">
+                            <h3 class="titulomodal">Confirmar Exclusão</h3>
+                            <span class="fecharmodal">&times;</span>
+                        </div>
+                        <div class="modalbody">
+                            <p>Tem certeza que deseja excluir este funcionário? Esta ação não pode ser desfeita.</p>
+                        </div>
+                        <div class="formacoes">
+                            <button type="button" class="btncancelar" id="btndeletacancel">Cancelar</button>
+                            <button type="button" class="btnsalvar" id="btncomfirmadelete">Excluir</button>
+                        </div>
+                    </div>
+                </div> 
+
 </body>
-</html>
+</html
