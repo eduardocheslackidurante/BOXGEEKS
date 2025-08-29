@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fotosintese</title>
+</head>
+<header>
+    <div class="logos">
+        <img src="Planet.png" alt="planet">
+        <img src="Juke.png" alt="logojuke">
+        <a href="registros.html">
+            <button class="voltar">voltar</button>
+        </a>
+    </div>
+</header>
+
+<body>
+    <div class="titulo">
+        <h1>Estoque</h1>
+    </div>
+    <div>
+        <a href="registros.html" class="btnvoltar">
+            <i class="seta_voltar"></i> Voltar
+        </a>
+    </div>
+    <div class="pesquisaestoque">
+        <div class="barra_pesquisaestoque">
+            <input type="text" id="pesquisa" class="pesquisarnome" placeholder="pesquisar produto por nome...">
+            <i class="lupa"></i>
+        </div>
+        <button type="button" class="btnlimpa" id="botaolimpa">
+            <i class="colocar_X"></i> Limpar
+        </button>
+        <span class="resultadopesquisa" id="resultados"></span>
+    </div>
+
+    <!-- tabela de produtos -->
+    <table id="tabela_estoque">
+        <thead>
+            <tr>
+                <th>Nome do Produto             </th>
+                <th>Quantidade em Estoque</th>
+            </tr>
+        </thead>
+        <tbody id="listaestoque">
+            <!-- os produtos aparece aqui -->
+        </tbody>
+    </table>
+</div>
+
+    
+
+</body>
+</html>
