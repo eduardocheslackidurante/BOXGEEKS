@@ -20,7 +20,7 @@
 </body>
 <main>
 
-    <div class="texto1">
+    <div class="titulogrwgwrueuvbpouRVNaiobnOIwnbo">
         <h1> Gerenciamento de produtos</h1>
     </div>
     <div class="addprod">
@@ -48,5 +48,85 @@
         <label for="precoprod">Preço (R$)</label>
                 <input type="number" id="precoprod" step="0.1" required>
     </div>
+    <div class="table-container">
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="productsList">
+                <!-- Produtos serão inseridos aqui dinamicamente -->
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- Modal para adicionar/editar produto -->
+<div id="modalprod" class="modal">
+    <div class="modalconteudo">
+        <div class="modalheader">
+            <h3 class="modaltitulo" id="modaltitulocss">Adicionar Produto</h3>
+            <span class="fecharmodal">&times;</span>
+        </div>
+        <form id="formprod">
+            <input type="hidden" id="produtoID">
+            <div class="formargrupo">
+                <label for="nomeprod">Nome do Produto</label>
+                <input type="text" id="nomeprod" required>
+            </div>
+            <div class="formargrupo">
+                <label for="descricaoprod">Descrição</label>
+                <textarea id="descricaoprod" required></textarea>
+            </div>
+            <div class="formargrupo">
+                <label for="categoriaprod">Categoria</label>
+                <select id="categoriaprod" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="eletronicos">Eletrônicos</option>
+                    <option value="informatica">Informática</option>
+                    <option value="acessorios">Acessórios</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+            <div class="formargrupo">
+                <label for="precoprod">Preço (R$)</label>
+                <input type="number" id="precoprod" step="0.01" required>
+            </div>
+            <div class="formargrupo">
+                <label for="quantidade_estoque">Quantidade em Estoque</label>
+                <input type="number" id="quantidade_estoque" required>
+            </div>
+            <div class="formargrupo">
+                <button type="button" class="btncancelar" id="btncancelar">Cancelar</button>
+                <button type="submit" class="btnsalvar">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de confirmação -->
+<div id="confirmModal" class="modal confirm-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Confirmar Exclusão</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.</p>
+        </div>
+        <div class="form-actions">
+            <button type="button" class="btn-cancel" id="btnCancelDelete">Cancelar</button>
+            <button type="button" class="btn-save btn-danger" id="btnConfirmDelete">Excluir</button>
+        </div>
+    </div>
+</div>
+
 </main>
 </html>
