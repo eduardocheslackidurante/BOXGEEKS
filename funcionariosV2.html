@@ -21,24 +21,24 @@
             <div class="conteudo">
                 <h1>gerenciamento de fufiofafiof</h1>
                     <button class="addfunc" id="btnaddfunc">
-                        <i class="fas fa-plus"></i> Novo Funcionário</button>
+                        <i class="iconeaddfunc"></i> Novo Funcionário</button>
                 </div>
                 <div class="statusdofunc">
-                    <div class="aniquiladordemundos">
+                    <div class="itemstatus">
                         <h3>Total de Funcionários</h3>
-                        <div class="">69</div>
+                        <div class="valorstauts">69</div>
                     </div>
-                    <div class="aniquiladordemundos">
+                    <div class="itemstatus">
                         <h3>Ativos</h3>
-                        <div class="valor-status">42</div>
+                        <div class="valorstauts">42</div>
                     </div>
-                    <div class="status-item">
+                    <div class="itemstatus">
                         <h3>Férias</h3>
-                        <div class="valor-status">13</div>
+                        <div class="valorstauts">13</di>
                     </div>
-                    <div class="status-item">
+                    <div class="itemstatus">
                         <h3>Desligados</h3>
-                        <div class="valor-status">-1</div>
+                        <div class="valorstauts">-1</div>
                     </div>
                 </div>
                 
@@ -54,76 +54,75 @@
                 </tr>
             </thead>
 
-                <!-- código abaixo é para gerar, atualizar e exlcuir funcionarios -->
+               
 
-                <!-- <div id="modalfunc" class="modal">
-                    <div class="conteudo-modal">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="modalTitle">Adicionar Funcionário</h3>
-                            <span class="close-modal">&times;</span>
+                 <div id="modalfunc" class="modal">
+                    <div class="conteudo_domodal">
+                        <div class="headermodal">
+                            <h3 class="titulomodal" id="titulomodal2">Adicionar Funcionário</h3>
+                            <span class="fecharmodal">&times;</span>
                         </div>
-                        <form id="employeeForm">
-                            <input type="hidden" id="idFuncionario">
-                            <div class="form-group">
-                                <label for="funcionarioNome">Nome Completo</label>
-                                <input type="text" id="funcionarioNome" required>
+                        <form id="formfunc">
+                            <input type="hidden" id="idfunc">
+                            <div class="grupoform">
+                                <label for="nomefunc">Nome Completo</label>
+                                <input type="text" id="funcnome" required>
                             </div>
-                            <div class="form-group">
-                                <label for="funcionarioCpf">CPF</label>
-                                <input type="text" id="funcionarioCpf" placeholder="000.000.000-00" required>
+                            <div class="grupoform">
+                                <label for="cpffunc">CPF</label>
+                                <input type="text" id="funcionariocpf" placeholder="000.000.000-00" required>
                             </div>
-                            <div class="form-group">
-                                <label for="FuncionarioTelefone">Telefone</label>
-                                <input type="text" id="telefoneFuncionario" placeholder="(00) 00000-0000" required>
+                            <div class="grupoform">
+                                <label for="functel">Telefone</label>
+                                <input type="text" id="telfunc" placeholder="(00) 00000-0000" required>
                             </div>
-                            <div class="form-group">
-                                <label for="funcionarioCargo">Cargo</label>
-                                <input type="text" id="funcionarioCargo" required>
+                            <div class="grupoform">
+                                <label for="cargofunc">Cargo</label>
+                                <input type="text" id="funccargo" required>
                             </div>
-                            <div class="form-group">
-                                <label for="funcionarioDepartamento">Departamento</label>
-                                <select id="funcionarioDepartamento" required>
+                            <div class="grupoform">
+                                <label for="funcdepartamento">Departamento</label>
+                                <select id="funcdepartamento" required>
                                     <option value="">Selecione...</option>
                                     <option value="Administrativo">Administrativo</option>
                                     <option value="Comercial">Comercial</option>
                                     <option value="Financeiro">Financeiro</option>
                                     <option value="Marketing">Marketing</option>
                                     <option value="TI">TI</option>
-                                    <option value="RH">Recursos Humanos</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="funcionarioStatus">Status</label>
-                                <select id="funcionarioStatus" required>
+                            <div class="grupoform">
+                                <label for="funcstatus">Status</label>
+                                <select id="funcstatus" required>
                                     <option value="Ativo">Ativo</option>
                                     <option value="Férias">Férias</option>
                                     <option value="Afastado">Afastado</option>
                                     <option value="Desligado">Desligado</option>
                                 </select>
                             </div>
-                            <div class="form-actions">
-                                <button type="button" class="btn-cancel" id="btnCancel">Cancelar</button>
-                                <button type="submit" class="btn-save">Salvar</button>
+                            <div class="formacoes">
+                                <button type="button" class="cancelarbtn" id="cancelar">Cancelar</button>
+                                <button type="submit" class="salvarbtn">Salvar</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 
-                <div id="modalConfirmacao" class="modal modal-confirmacao">
-                    <div class="conteudo-modal">
-                        <div class="modal-header">
-                            <h3 class="titulo-modal">Confirmar Exclusão</h3>
-                            <span class="fechar-modal">&times;</span>
+                <div id="modalconfirm" class="modalarmacao">
+                    <div class="conteudomodal">
+                        <div class="modalheader">
+                            <h3 class="titulomodal">Confirmar Exclusão</h3>
+                            <span class="fecharmodal">&times;</span>
                         </div>
-                        <div class="modal-body">
+                        <div class="modalbody">
                             <p>Tem certeza que deseja excluir este funcionário? Esta ação não pode ser desfeita.</p>
                         </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn-cancel" id="btnCancelDelete">Cancelar</button>
-                            <button type="button" class="btn-save btn-danger" id="btnConfirmarExclusao">Excluir</button>
+                        <div class="formacoes">
+                            <button type="button" class="btncancelar" id="btndeletacancel">Cancelar</button>
+                            <button type="button" class="btnsalvar" id="btncomfirmadelete">Excluir</button>
                         </div>
                     </div>
-                </div> -->
+                </div> 
 
 </body>
-</html>
+</html
