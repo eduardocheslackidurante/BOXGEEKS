@@ -13,10 +13,9 @@ CREATE TABLE IF NOT EXISTS clientes (
 CREATE TABLE IF NOT EXISTS produtos (
   id_produtos INTEGER PRIMARY KEY AUTOINCREMENT,
   nomeprod VARCHAR(100) NOT NULL,
-  productPrice DECIMAL(8,2) NOT NULL,
+  precoprod DECIMAL(8,2) NOT NULL,
   categoriaprod TEXT,
-  productDescription TEXT,
-  quantidade_estoque INTEGER
+  descricaoprod TEXT
 );
 
 CREATE TABLE IF NOT EXISTS funcionario (
@@ -29,9 +28,6 @@ CREATE TABLE IF NOT EXISTS funcionario (
   funcstatus TEXT
 );
 
-SELECT * FROM clientes;
-SELECT * FROM produtos;
-SELECT * FROM funcionario;
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM funcionario;
