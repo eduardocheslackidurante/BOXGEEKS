@@ -7,8 +7,9 @@ CREATE TABLE IF NOT EXISTS clientes (
   nome VARCHAR(100) NOT NULL,
   cpf_cliente VARCHAR(14) NOT NULL UNIQUE,
   telefone VARCHAR(15),
-  email VARCHAR(100)
- );
+  email VARCHAR(100),
+  endereco VARCHAR(255)
+);
 
 CREATE TABLE IF NOT EXISTS produtos (
   id_produtos INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,7 +22,7 @@ CREATE TABLE IF NOT EXISTS produtos (
 CREATE TABLE IF NOT EXISTS funcionario (
   idfunc INTEGER PRIMARY KEY AUTOINCREMENT,
   funcnome VARCHAR(100) NOT NULL,
-  cpffunc TEXT,
+  cpffunc VARCHAR(14) NOT NULL UNIQUE,
   telfunc VARCHAR(15),
   funccargo VARCHAR(30),
   funcdepartamento TEXT,
